@@ -87,7 +87,7 @@ const App: FC = () => {
       )}
       {tableOfContents && (
         <CollapsedBox
-          name="Innholdfortegnelse"
+          name="Innholdsfortegnelse"
           contents={tableOfContents}
           open={!shortSummary && !longSummary}
         ></CollapsedBox>

@@ -20,19 +20,26 @@ const CollapseContainer = styled.div`
   width: 60%;
 `;
 
-const CollapseHandle = styled.span`
-  background-color: white;
-  color: rgb(40, 75, 99);
-  font-family: Barlow, sans-serif;
-  font-size: 23px;
-  font-weight: Bold;
-  display: inline-block;
-  border-radius: 5px;
-  margin-top: 0.5rem;
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
-  width: 100%;
-  cursor: pointer;
+const CollapseHandle = styled.button`
+  && {
+    background-color: white;
+    color: rgb(40, 75, 99);
+    font-family: Barlow, sans-serif;
+    font-size: 23px;
+    font-weight: Bold;
+    text-align: left;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    &:focus {
+      border-color: orange;
+    }
+  }
 `;
 
 const CollapsedSummary = styled.p`
