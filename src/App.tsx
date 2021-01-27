@@ -14,7 +14,7 @@ const OuterContainer = styled.div`
   min-height: 100vh;
 `;
 
-const TitleLabel = styled.div`
+const TitleLabel = styled.h1`
   font-family: Barlow, sans-serif;
   font-size: 35px;
   font-weight: Bold;
@@ -24,20 +24,26 @@ const TitleLabel = styled.div`
   margin-bottom: 1rem;
 `;
 
-const AuthorLabel = styled.span`
+const AuthorLabel = styled.h2`
   display: inline-block;
   font-family: Barlow, sans-serif;
   font-size: 25px;
+  font-weight: 200;
   margin-left: 1rem;
   padding-right: 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
   border-right: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
-const ISBNLabel = styled.span`
+const ISBNLabel = styled.h2`
   display: inline-block;
   font-family: Barlow, sans-serif;
   font-size: 25px;
+  font-weight: 200;
   margin-left: 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
 `;
 
 const ImageContainer = styled.img`
