@@ -3,25 +3,16 @@ import "./App.css";
 import styled from "styled-components";
 import Header from "./components/Header";
 import CollapsedBox from "./components/CollapsedBox";
-import pesljegere from "./resources/pelsjegere.jpg";
-
-const OuterContainer = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  min-height: 100vh;
-`;
+import pelsjegere from "./resources/pelsjegere.jpg";
 
 const TitleLabel = styled.h1`
   font-family: Barlow, sans-serif;
   font-size: 35px;
   font-weight: Bold;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   margin-left: 1rem;
   margin-right: 1rem;
   margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
 const AuthorLabel = styled.h2`
@@ -30,9 +21,9 @@ const AuthorLabel = styled.h2`
   font-size: 25px;
   font-weight: 200;
   margin-left: 1rem;
-  padding-right: 1rem;
   margin-top: 0;
   margin-bottom: 0;
+  padding-right: 1rem;
   border-right: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
@@ -60,21 +51,22 @@ const App: FC = () => {
   let shortSummary;
   let longSummary;
   let tableOfContents;
-  shortSummary = "That sweet sweet content";
+  shortSummary =
+    "Etter å ha brutt opp fra sin sakførerpraksis i Norge, reiste Ingstad til arktiske Canada, der han levde i fire år som pelsjeger.";
   longSummary =
-    "This is a long version containing information about that same sweet sweet content. It is however important to difrerentiate the two. ";
+    "Etter å ha brutt opp fra sin sakførerpraksis i Norge, reiste Ingstad til arktiske Canada, der han levde i fire år som pelsjeger. Pelsjegerliv er beretningen om hans opplevelser i denne tiden. Boken ble utgitt i 1931  og er hans første av i alt tolv bøker";
   tableOfContents = [
     "The opening",
     "Second breakfast",
-    "Three's a party",
+    "Three's a crowd",
     "May the fourth be with you",
     "Cinco de mayo",
   ];
   return (
-    <OuterContainer>
-      <Header></Header>
-      <TitleLabel>The Book of Books</TitleLabel>{" "}
-      <ImageContainer src={pesljegere}></ImageContainer>
+    <>
+      <Header />
+      <TitleLabel>Pelsjegerliv blandt Nord-Canadas indianere</TitleLabel>
+      <ImageContainer src={pelsjegere} alt="Bilde av boken"></ImageContainer>
       <AuthorLabel>Helge Ingstad</AuthorLabel>
       <ISBNLabel>ISBN: 9788205377547</ISBNLabel>
       {shortSummary && (
@@ -98,7 +90,8 @@ const App: FC = () => {
           open={!shortSummary && !longSummary}
         ></CollapsedBox>
       )}
-    </OuterContainer>
+      <br></br>
+    </>
   );
 };
 

@@ -5,15 +5,15 @@ import UnitLogo from "../resources/logoUnit.png";
 const Bar = styled.div`
   height: 5rem;
   width: 100%;
+  background-color: white;
   margin-bottom: 1rem;
   box-shadow: 0px 5px 5px grey;
-  background-color: white;
 `;
 const Title = styled.h1`
-  color: rgb(40, 75, 99);
   position: absolute;
-  font-size: 1.5rem;
+  color: rgb(40, 75, 99);
   font-family: Crimson Text, serif;
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 5rem;
   margin-left: 1rem;
@@ -41,7 +41,7 @@ const Header: FC = () => {
   return (
     <Bar>
       <Title>
-        Innhold-visning <Divider></Divider>
+        Innholdsinformasjon <Divider />
       </Title>
 
       <LogoImgWrapper src={UnitLogo} alt="Unit logo"></LogoImgWrapper>

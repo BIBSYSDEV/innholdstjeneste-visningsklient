@@ -9,33 +9,36 @@ interface CollapsedBoxProps {
 }
 
 const CollapseContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
+  background-color: white;
+  width: 60%;
+  margin-top: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   padding-bottom: 0.5rem;
-  margin-top: 1rem;
-  width: 60%;
+  border-radius: 5px;
+  border: solid rgb(40, 75, 99);
 `;
 
-const CollapseHandle = styled.button`
+const CollapseButton = styled.button`
   && {
+    width: 100%;
+    display: inline-block;
     background-color: white;
     color: rgb(40, 75, 99);
+    text-align: left;
     font-family: Barlow, sans-serif;
     font-size: 23px;
     font-weight: Bold;
-    text-align: left;
-    display: inline-block;
-    border-radius: 5px;
     margin-top: 0.5rem;
     padding-top: 0.2rem;
     padding-bottom: 0.2rem;
-    width: 100%;
-    cursor: pointer;
     outline: none;
+    border-radius: 5px;
+    border-width: 0.25rem;
+    border-color: rgb(40, 75, 99);
+    cursor: pointer;
     &:focus {
       border-color: orange;
     }
@@ -46,20 +49,20 @@ const CollapsedSummary = styled.p`
   background-color: white;
   font-family: Barlow, sans-serif;
   font-size: 20px;
-  border-radius: 5px;
-  padding: 1rem;
   margin-top: 0.5rem;
   margin-bottom: 0;
+  padding: 1rem;
+  border-radius: 5px;
 `;
 
 const CollapsedContents = styled.ul`
   background-color: white;
   font-family: Barlow, sans-serif;
   font-size: 20px;
-  border-radius: 5px;
-  padding: 1rem;
   margin-top: 0.5rem;
   margin-bottom: 0;
+  padding: 1rem;
+  border-radius: 5px;
 `;
 
 const CollapsedBox: FC<CollapsedBoxProps> = ({
@@ -68,22 +71,26 @@ const CollapsedBox: FC<CollapsedBoxProps> = ({
   contents,
   open,
 }) => {
-  const [showKortInfo, setShowKortInfo] = useState(open);
+  const [collapsed, setcollapsed] = useState(!open);
 
-  const handleKortInfoClick = () => {
-    setShowKortInfo(!showKortInfo);
+  const handleButtonClick = () => {
+    setcollapsed(!collapsed);
   };
 
   return (
     <CollapseContainer>
-      <CollapseHandle onClick={handleKortInfoClick}>
-        {showKortInfo ? "▼" : "▶"} {name}
-      </CollapseHandle>
-      {showKortInfo && summary && (
-        <CollapsedSummary>{summary}</CollapsedSummary>
+      <CollapseButton
+        aria-expanded={!collapsed}
+        role="knapp"
+        onClick={handleButtonClick}
+      >
+        {!collapsed ? "▼" : "▶"} {name}
+      </CollapseButton>
+      {!collapsed && summary && (
+        <CollapsedSummary aria-relevant="text">{summary}</CollapsedSummary>
       )}
-      {showKortInfo && contents && (
-        <CollapsedContents>
+      {!collapsed && contents && (
+        <CollapsedContents aria-relevant="text">
           {contents.map((value, index) => {
             return <p key={index}>{value}</p>;
           })}
