@@ -1,51 +1,9 @@
 import React, { FC } from 'react';
 import './App.css';
-import styled from 'styled-components';
 import Header from './components/Header';
 import CollapsedBox from './components/CollapsedBox';
+import { TitleLabel, AuthorLabel, ISBNLabel, ImageContainer } from './components/CutsomElements';
 import pelsjegere from './resources/pelsjegere.jpg';
-
-const TitleLabel = styled.h1`
-  font-family: Barlow, sans-serif;
-  font-size: 35px;
-  font-weight: Bold;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-`;
-
-const AuthorLabel = styled.h2`
-  display: inline-block;
-  font-family: Barlow, sans-serif;
-  font-size: 25px;
-  font-weight: 200;
-  margin-left: 1rem;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-right: 1rem;
-  border-right: 1px solid rgba(0, 0, 0, 0.3);
-`;
-
-const ISBNLabel = styled.h2`
-  display: inline-block;
-  font-family: Barlow, sans-serif;
-  font-size: 25px;
-  font-weight: 200;
-  margin-left: 1rem;
-  margin-top: 0;
-  margin-bottom: 0;
-`;
-
-const ImageContainer = styled.img`
-  position: absolute;
-  right: 3rem;
-  display: block;
-  max-height: 40rem;
-  max-width: 40rem;
-  min-height: 3rem;
-  min-width: 3rem;
-`;
 
 const App: FC = () => {
   const shortSummary =
