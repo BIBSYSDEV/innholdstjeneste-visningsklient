@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import "./App.css";
-import styled from "styled-components";
-import Header from "./components/Header";
-import CollapsedBox from "./components/CollapsedBox";
-import pelsjegere from "./resources/pelsjegere.jpg";
+import React, { FC } from 'react';
+import './App.css';
+import styled from 'styled-components';
+import Header from './components/Header';
+import CollapsedBox from './components/CollapsedBox';
+import pelsjegere from './resources/pelsjegere.jpg';
 
 const TitleLabel = styled.h1`
   font-family: Barlow, sans-serif;
@@ -48,19 +48,16 @@ const ImageContainer = styled.img`
 `;
 
 const App: FC = () => {
-  let shortSummary;
-  let longSummary;
-  let tableOfContents;
-  shortSummary =
-    "Etter å ha brutt opp fra sin sakførerpraksis i Norge, reiste Ingstad til arktiske Canada, der han levde i fire år som pelsjeger.";
-  longSummary =
-    "Etter å ha brutt opp fra sin sakførerpraksis i Norge, reiste Ingstad til arktiske Canada, der han levde i fire år som pelsjeger. Pelsjegerliv er beretningen om hans opplevelser i denne tiden. Boken ble utgitt i 1931  og er hans første av i alt tolv bøker";
-  tableOfContents = [
-    "The opening",
-    "Second breakfast",
+  const shortSummary =
+    'Etter å ha brutt opp fra sin sakførerpraksis i Norge, reiste Ingstad til arktiske Canada, der han levde i fire år som pelsjeger.';
+  const longSummary =
+    'Etter å ha brutt opp fra sin sakførerpraksis i Norge, reiste Ingstad til arktiske Canada, der han levde i fire år som pelsjeger. Pelsjegerliv er beretningen om hans opplevelser i denne tiden. Boken ble utgitt i 1931  og er hans første av i alt tolv bøker';
+  const tableOfContents = [
+    'The opening',
+    'Second breakfast',
     "Three's a crowd",
-    "May the fourth be with you",
-    "Cinco de mayo",
+    'May the fourth be with you',
+    'Cinco de mayo',
   ];
   return (
     <>
@@ -70,25 +67,16 @@ const App: FC = () => {
       <AuthorLabel>Helge Ingstad</AuthorLabel>
       <ISBNLabel>ISBN: 9788205377547</ISBNLabel>
       {shortSummary && (
-        <CollapsedBox
-          name="Beskrivelse fra forlaget (kort)"
-          summary={shortSummary}
-          open={true}
-        ></CollapsedBox>
+        <CollapsedBox name="Beskrivelse fra forlaget (kort)" summary={shortSummary} open={true}></CollapsedBox>
       )}
       {longSummary && (
-        <CollapsedBox
-          name="Beskrivelse fra forlaget (lang)"
-          summary={longSummary}
-          open={!shortSummary}
-        ></CollapsedBox>
+        <CollapsedBox name="Beskrivelse fra forlaget (lang)" summary={longSummary} open={!shortSummary}></CollapsedBox>
       )}
       {tableOfContents && (
         <CollapsedBox
           name="Innholdsfortegnelse"
           contents={tableOfContents}
-          open={!shortSummary && !longSummary}
-        ></CollapsedBox>
+          open={!shortSummary && !longSummary}></CollapsedBox>
       )}
       <br></br>
     </>
