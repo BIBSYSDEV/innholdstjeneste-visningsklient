@@ -6,7 +6,7 @@ interface StyledComponentsProps {
 
 export const CollapseContainer = styled.div<StyledComponentsProps>`
   background-color: ${({ oria }) => (oria && 'white') || 'green'};
-  width: 60%;
+  width: 65%;
   margin-top: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -94,13 +94,11 @@ export const ISBNLabel = styled.h2`
 `;
 
 export const ImageContainer = styled.img`
-  position: absolute;
-  right: 3rem;
-  display: block;
-  max-height: 40rem;
-  max-width: 40rem;
-  min-height: 3rem;
-  min-width: 3rem;
+  display: inline;
+  float: right;
+  margin-right: 1rem;
+  height: auto;
+  width: 20%;
 `;
 
 const exportedElements = [

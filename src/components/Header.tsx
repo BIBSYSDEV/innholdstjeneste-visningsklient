@@ -6,18 +6,19 @@ const Bar = styled.div`
   height: 5rem;
   width: 100%;
   background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
   box-shadow: 0px 5px 5px grey;
 `;
 const Title = styled.h1`
-  position: absolute;
   color: rgb(40, 75, 99);
   font-family: Crimson Text, serif;
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 5rem;
   margin-left: 1rem;
-  margin-top: 0;
 `;
 
 const Divider = styled.span`
@@ -29,12 +30,9 @@ const Divider = styled.span`
 `;
 
 const LogoImgWrapper = styled.img`
-  position: absolute;
-  height: 3rem;
-  width: 10rem;
-  right: 1rem;
-  top: 1rem;
-  line-height: 5rem;
+  margin-right: 1rem;
+  height: auto;
+  width: 20%;
 `;
 
 const Header: FC = () => {
