@@ -12,6 +12,7 @@ const Bar = styled.div`
   margin-bottom: 1rem;
   box-shadow: 0px 5px 5px grey;
 `;
+
 const Title = styled.h1`
   color: rgb(40, 75, 99);
   font-family: Crimson Text, serif;

@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 
-interface StyledComponentsProps {
-  oria: boolean;
-}
-
-export const CollapseContainer = styled.div<StyledComponentsProps>`
-  background-color: ${({ oria }) => (oria && 'white') || 'green'};
+export const CollapseContainer = styled.div`
+  background-color: white;
   width: 65%;
   margin-top: 1rem;
   margin-left: 1rem;

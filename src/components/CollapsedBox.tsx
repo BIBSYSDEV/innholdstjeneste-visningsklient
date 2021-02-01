@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { CollapseContainer, CollapseButton, CollapsedSummary, CollapsedContents } from './CutsomElements';
 
 interface CollapsedBoxProps {
@@ -8,24 +8,15 @@ interface CollapsedBoxProps {
   open: boolean;
 }
 
-const queryParams = window.location.href;
-
 const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, open }) => {
   const [collapsed, setcollapsed] = useState(!open);
-  const [siteIsOria, setSiteIsOria] = useState(false);
-
-  useEffect(() => {
-    if (queryParams && queryParams.includes('oria')) {
-      setSiteIsOria(true);
-    }
-  }, []);
 
   const handleButtonClick = () => {
     setcollapsed(!collapsed);
   };
 
   return (
-    <CollapseContainer oria={siteIsOria}>
+    <CollapseContainer>
       <CollapseButton aria-expanded={!collapsed} role="knapp" onClick={handleButtonClick}>
         {!collapsed ? '▼' : '▶'} {name}
       </CollapseButton>

@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import CollapsedBox from './components/CollapsedBox';
 import { TitleLabel, AuthorLabel, ISBNLabel, ImageContainer } from './components/CutsomElements';
 import pelsjegere from './resources/pelsjegere.jpg';
+
+const URL = window.location.href;
 
 const App: FC = () => {
   const shortSummary =
@@ -17,9 +19,18 @@ const App: FC = () => {
     'May the fourth be with you',
     'Cinco de mayo',
   ];
+
+  const [siteIsOria, setSiteIsOria] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (URL && URL.includes('oria')) {
+      setSiteIsOria(true);
+    }
+  }, []);
+
   return (
     <>
-      <Header />
+      {!siteIsOria && <Header />}
       <TitleLabel>Pelsjegerliv blandt Nord-Canadas indianere</TitleLabel>
       <ImageContainer src={pelsjegere} alt="Bilde av boken"></ImageContainer>
       <AuthorLabel>Helge Ingstad</AuthorLabel>
