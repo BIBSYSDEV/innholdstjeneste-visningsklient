@@ -96,16 +96,3 @@ export const ImageContainer = styled.img`
   height: auto;
   width: 20%;
 `;
-
-const exportedElements = [
-  CollapseContainer,
-  CollapseButton,
-  CollapsedSummary,
-  CollapsedContents,
-  TitleLabel,
-  AuthorLabel,
-  ISBNLabel,
-  ImageContainer,
-];
-
-export default exportedElements;

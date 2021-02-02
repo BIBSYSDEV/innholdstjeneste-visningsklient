@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { CollapseContainer, CollapseButton, CollapsedSummary, CollapsedContents } from './CutsomElements';
+import { CollapseContainer, CollapseButton, CollapsedSummary, CollapsedContents } from './CustomElements';
 
 interface CollapsedBoxProps {
   name: string;

@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import './App.css';
 import Header from './components/Header';
 import CollapsedBox from './components/CollapsedBox';
-import { TitleLabel, AuthorLabel, ISBNLabel, ImageContainer } from './components/CutsomElements';
+import { TitleLabel, AuthorLabel, ISBNLabel, ImageContainer } from './components/CustomElements';
 import pelsjegere from './resources/pelsjegere.jpg';
 
 const URL = window.location.href;
@@ -20,17 +20,9 @@ const App: FC = () => {
     'Cinco de mayo',
   ];
 
-  const [siteIsOria, setSiteIsOria] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (URL && URL.includes('oria')) {
-      setSiteIsOria(true);
-    }
-  }, []);
-
   return (
     <>
-      {!siteIsOria && <Header />}
+      {!URL.includes('oria') && <Header />}
       <TitleLabel>Pelsjegerliv blandt Nord-Canadas indianere</TitleLabel>
       <ImageContainer src={pelsjegere} alt="Bilde av boken"></ImageContainer>
       <AuthorLabel>Helge Ingstad</AuthorLabel>
