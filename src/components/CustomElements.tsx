@@ -21,7 +21,7 @@ export const CollapseButton = styled.button`
     color: rgb(40, 75, 99);
     text-align: left;
     font-family: Barlow, sans-serif;
-    font-size: 23px;
+    font-size: 20px;
     font-weight: Bold;
     margin-top: 0.5rem;
     padding-top: 0.2rem;
@@ -40,7 +40,7 @@ export const CollapseButton = styled.button`
 export const CollapsedSummary = styled.p`
   background-color: white;
   font-family: Barlow, sans-serif;
-  font-size: 20px;
+  font-size: 15px;
   margin-top: 0.5rem;
   margin-bottom: 0;
   padding: 1rem;
@@ -50,7 +50,7 @@ export const CollapsedSummary = styled.p`
 export const CollapsedContents = styled.ul`
   background-color: white;
   font-family: Barlow, sans-serif;
-  font-size: 20px;
+  font-size: 15px;
   margin-top: 0.5rem;
   margin-bottom: 0;
   padding: 1rem;
@@ -59,7 +59,7 @@ export const CollapsedContents = styled.ul`
 
 export const TitleLabel = styled.h1`
   font-family: Barlow, sans-serif;
-  font-size: 35px;
+  font-size: 30px;
   font-weight: Bold;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -70,7 +70,7 @@ export const TitleLabel = styled.h1`
 export const AuthorLabel = styled.h2`
   display: inline-block;
   font-family: Barlow, sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 200;
   margin-left: 1rem;
   margin-top: 0;
@@ -82,7 +82,7 @@ export const AuthorLabel = styled.h2`
 export const ISBNLabel = styled.h2`
   display: inline-block;
   font-family: Barlow, sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 200;
   margin-left: 1rem;
   margin-top: 0;
@@ -94,5 +94,6 @@ export const ImageContainer = styled.img`
   float: right;
   margin-right: 1rem;
   height: auto;
-  width: 20%;
+  width: auto;
+  max-width: 20%;
 `;
