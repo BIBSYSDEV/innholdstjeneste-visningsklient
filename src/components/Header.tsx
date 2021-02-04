@@ -33,6 +33,7 @@ const Divider = styled.span`
 const LogoImgWrapper = styled.img`
   margin-right: 1rem;
   height: auto;
+  max-height: 100%;
   width: 20%;
 `;
 
