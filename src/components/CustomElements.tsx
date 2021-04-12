@@ -97,3 +97,8 @@ export const ImageContainer = styled.img`
   width: auto;
   max-width: 20%;
 `;
+
+export const ErrorTextField = styled.div`
+  white-space: pre-line;
+  font-weight: Bold;
+`;
