@@ -28,6 +28,11 @@ const App: FC = () => {
       .get(url)
       .then(({ data }) => {
         const innholdsinformasjonObject = JSON.parse(data.body);
+        if (!innholdsinformasjonObject) {
+          return;
+        }
+        innholdsinformasjonObject.description_long = splitOnTag('<p>', innholdsinformasjonObject.description_long);
+        innholdsinformasjonObject.table_of_contents = splitOnTag('<br>', innholdsinformasjonObject.table_of_contents);
         setInnholdsinformasjon(innholdsinformasjonObject);
         setErrorPresent(false);
       })
@@ -64,7 +69,7 @@ const App: FC = () => {
       {innholdsinformasjon.description_long && (
         <CollapsedBox
           name="Beskrivelse fra forlaget (lang)"
-          summary={innholdsinformasjon.description_long}
+          contents={innholdsinformasjon.description_long}
           open={!innholdsinformasjon.description_long}
         />
       )}
@@ -79,4 +84,18 @@ const App: FC = () => {
     </>
   );
 };
+
+function splitOnTag(tag: string, field: string) {
+  if (field) {
+    let field_array;
+    if (field.includes(tag)) {
+      field_array = field.split(tag);
+    } else {
+      field_array = [field];
+    }
+    return field_array;
+  }
+  return null;
+}
+
 export default App;
