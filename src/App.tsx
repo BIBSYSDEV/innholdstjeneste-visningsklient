@@ -31,6 +31,7 @@ const App: FC = () => {
         if (!innholdResponse) {
           return;
         }
+        innholdResponse.description_short = splitOnTag('<p>', innholdResponse.description_short).map(removeAllTags);
         innholdResponse.description_long = splitOnTag('<p>', innholdResponse.description_long).map(removeAllTags);
         innholdResponse.table_of_contents = splitOnTag('<br>', innholdResponse.table_of_contents).map(removeAllTags);
         setInnholdsinformasjon(innholdResponse);
@@ -59,25 +60,25 @@ const App: FC = () => {
       )}
       <AuthorLabel>Helge Ingstad</AuthorLabel>
       <ISBNLabel>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
-      {innholdsinformasjon.description_short && (
+      {!isEmpty(innholdsinformasjon.description_short) && (
         <CollapsedBox
           name="Beskrivelse fra forlaget (kort)"
-          summary={innholdsinformasjon.description_short}
+          contents={innholdsinformasjon.description_short}
           open={true}
         />
       )}
-      {innholdsinformasjon.description_long && (
+      {!isEmpty(innholdsinformasjon.description_long) && (
         <CollapsedBox
           name="Beskrivelse fra forlaget (lang)"
           contents={innholdsinformasjon.description_long}
-          open={!innholdsinformasjon.description_long}
+          open={!isEmpty(innholdsinformasjon.description_long)}
         />
       )}
-      {innholdsinformasjon.table_of_contents && (
+      {!isEmpty(innholdsinformasjon.table_of_contents) && (
         <CollapsedBox
           name="Innholdsfortegnelse"
           contents={innholdsinformasjon.table_of_contents}
-          open={!innholdsinformasjon.description_short && !innholdsinformasjon.description_long}
+          open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
         />
       )}
       <br />
@@ -87,6 +88,10 @@ const App: FC = () => {
 
 function removeAllTags(value: string) {
   return value.replace(/(<([^>]+)>)/gi, '');
+}
+
+function isEmpty(array?: string[]): boolean {
+  return array == undefined || array.length < 1;
 }
 
 function splitOnTag(tag: string, field: string) {
