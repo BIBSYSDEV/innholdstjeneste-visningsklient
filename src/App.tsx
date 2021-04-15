@@ -27,13 +27,13 @@ const App: FC = () => {
     axios
       .get(url)
       .then(({ data }) => {
-        const innholdsinformasjonObject = JSON.parse(data.body);
-        if (!innholdsinformasjonObject) {
+        const innholdResponse = JSON.parse(data.body);
+        if (!innholdResponse) {
           return;
         }
-        innholdsinformasjonObject.description_long = splitOnTag('<p>', innholdsinformasjonObject.description_long);
-        innholdsinformasjonObject.table_of_contents = splitOnTag('<br>', innholdsinformasjonObject.table_of_contents);
-        setInnholdsinformasjon(innholdsinformasjonObject);
+        innholdResponse.description_long = splitOnTag('<p>', innholdResponse.description_long).map(removeAllTags);
+        innholdResponse.table_of_contents = splitOnTag('<br>', innholdResponse.table_of_contents).map(removeAllTags);
+        setInnholdsinformasjon(innholdResponse);
         setErrorPresent(false);
       })
       .catch(() => {
@@ -85,6 +85,10 @@ const App: FC = () => {
   );
 };
 
+function removeAllTags(value: string) {
+  return value.replace(/(<([^>]+)>)/gi, '');
+}
+
 function splitOnTag(tag: string, field: string) {
   if (field) {
     let field_array;
@@ -95,7 +99,7 @@ function splitOnTag(tag: string, field: string) {
     }
     return field_array;
   }
-  return null;
+  return [];
 }
 
 export default App;
