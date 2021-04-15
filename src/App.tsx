@@ -91,7 +91,7 @@ function removeAllTags(value: string) {
 }
 
 function isEmpty(array?: string[]): boolean {
-  return array == undefined || array.length < 1;
+  return array === undefined || array.length < 1;
 }
 
 function splitOnTag(tag: string, field: string) {
