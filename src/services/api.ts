@@ -26,9 +26,7 @@ function removeAllTags(value: string) {
 
 function splitOnTags(field: string) {
   if (field) {
-    //return field.split('<p>','<br>', '<li>');
-    //TODO: fix
-    return [field];
+    return field.split('<br>').join('###').split('<p>').join('###').split('<li>').join('###').split('###');
   }
   return [];
 }
