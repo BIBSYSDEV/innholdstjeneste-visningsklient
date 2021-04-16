@@ -67,18 +67,6 @@ export const TitleLabel = styled.h1`
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
-export const AuthorLabel = styled.h2`
-  display: inline-block;
-  font-family: Barlow, sans-serif;
-  font-size: 20px;
-  font-weight: 200;
-  margin-left: 1rem;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-right: 1rem;
-  border-right: 1px solid rgba(0, 0, 0, 0.3);
-`;
-
 export const ISBNLabel = styled.h2`
   display: inline-block;
   font-family: Barlow, sans-serif;
