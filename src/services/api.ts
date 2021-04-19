@@ -4,7 +4,7 @@ import axios from 'axios';
 const apiUrl = process.env.REACT_APP_INNHOLDSTJENESTE_API_URL;
 
 export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsformasjon> => {
-  const url = apiUrl + '?isbn=' + isbn;
+  const url = `${apiUrl}?isbn=${isbn}`;
   const apiResponse = await axios.get(url);
   const innholdResponse = JSON.parse(apiResponse.data.body);
   const innholdsinformasjon: Innholdsformasjon = { isbn: isbn };

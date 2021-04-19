@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Innholdsformasjon } from './types';
 import CollapsedBox from './components/CollapsedBox';
@@ -13,25 +13,24 @@ function isEmpty(array?: string[]): boolean {
   return array === undefined || array.length < 1;
 }
 
-const App: FC = () => {
+const App = () => {
   const [innholdsinformasjon, setInnholdsinformasjon] = useState<Innholdsformasjon | undefined>();
-  const [errorPresent, setErrorPresent] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const [isLoading, setIsloading] = useState<boolean>(false);
+  const [errorPresent, setErrorPresent] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsloading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsloading(true);
       const searchQuery = new URLSearchParams(window.location.search);
       const isbn = searchQuery.get('isbn');
-      if (!isbn || isbn === '') {
+      if (!isbn) {
         setErrorPresent(true);
         setErrorMessage(`Resource not found. \nParameter specifying isbn was not provided.`);
         return;
       }
       try {
-        const innholdsinformasjon = await getInnholdsinformasjon(isbn);
-        setInnholdsinformasjon(innholdsinformasjon);
+        setIsloading(true);
+        setInnholdsinformasjon(await getInnholdsinformasjon(isbn));
         setErrorPresent(false);
       } catch (e) {
         setErrorPresent(true);
