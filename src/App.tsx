@@ -53,32 +53,37 @@ const App = () => {
   return (
     <>
       {!URL.includes('oria') && <Header />}
-      {isLoading && <progress />}
-      {!isLoading && <TitleLabel>{innholdsinformasjon.title}</TitleLabel>}
-      {!isLoading && imageUrl && innholdsinformasjon.image_small && (
-        <ImageContainer src={imageUrl + innholdsinformasjon.image_small} alt="Bilde av boken" />
-      )}
-      <ISBNLabel>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
-      {!isLoading && !isEmpty(innholdsinformasjon.description_short) && (
-        <CollapsedBox
-          name="Beskrivelse fra forlaget (kort)"
-          contents={innholdsinformasjon.description_short}
-          open={true}
-        />
-      )}
-      {!isLoading && !isEmpty(innholdsinformasjon.description_long) && (
-        <CollapsedBox
-          name="Beskrivelse fra forlaget (lang)"
-          contents={innholdsinformasjon.description_long}
-          open={!isEmpty(innholdsinformasjon.description_long)}
-        />
-      )}
-      {!isLoading && !isEmpty(innholdsinformasjon.table_of_contents) && (
-        <CollapsedBox
-          name="Innholdsfortegnelse"
-          contents={innholdsinformasjon.table_of_contents}
-          open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
-        />
+      {isLoading ? (
+        <progress />
+      ) : (
+        <>
+          <TitleLabel>{innholdsinformasjon.title}</TitleLabel>
+          {imageUrl && innholdsinformasjon.image_small && (
+            <ImageContainer src={imageUrl + innholdsinformasjon.image_small} alt="Bilde av boken" />
+          )}
+          <ISBNLabel>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
+          {!isEmpty(innholdsinformasjon.description_short) && (
+            <CollapsedBox
+              name="Beskrivelse fra forlaget (kort)"
+              contents={innholdsinformasjon.description_short}
+              open={true}
+            />
+          )}
+          {!isEmpty(innholdsinformasjon.description_long) && (
+            <CollapsedBox
+              name="Beskrivelse fra forlaget (lang)"
+              contents={innholdsinformasjon.description_long}
+              open={!isEmpty(innholdsinformasjon.description_long)}
+            />
+          )}
+          {!isEmpty(innholdsinformasjon.table_of_contents) && (
+            <CollapsedBox
+              name="Innholdsfortegnelse"
+              contents={innholdsinformasjon.table_of_contents}
+              open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
+            />
+          )}
+        </>
       )}
       <br />
     </>
