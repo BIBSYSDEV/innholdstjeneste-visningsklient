@@ -15,35 +15,32 @@ function isEmpty(array?: string[]): boolean {
 
 const App = () => {
   const [innholdsinformasjon, setInnholdsinformasjon] = useState<Innholdsformasjon | undefined>();
-  const [errorPresent, setErrorPresent] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState<Error>();
 
   useEffect(() => {
     const fetchData = async () => {
       const searchQuery = new URLSearchParams(window.location.search);
       const isbn = searchQuery.get('isbn');
       if (!isbn) {
-        setErrorPresent(true);
-        setErrorMessage(`Resource not found. \nParameter specifying isbn was not provided.`);
+        setLoadingError(new Error(`Resource not found. \nParameter specifying isbn was not provided.`));
         return;
       }
       try {
-        setIsloading(true);
+        setIsLoading(true);
+        setLoadingError(undefined);
         setInnholdsinformasjon(await getInnholdsinformasjon(isbn));
-        setErrorPresent(false);
       } catch (e) {
-        setErrorPresent(true);
-        setErrorMessage('Failed to retrieve the resource, please try again.');
+        setLoadingError(new Error('Failed to retrieve the resource, please try again.'));
       } finally {
-        setIsloading(false);
+        setIsLoading(false);
       }
     };
     fetchData();
   }, []);
 
-  if (errorPresent) {
-    return <ErrorTextField>{errorMessage}</ErrorTextField>;
+  if (loadingError) {
+    return <ErrorTextField>{loadingError.message}</ErrorTextField>;
   }
 
   if (!innholdsinformasjon) {
