@@ -10,7 +10,7 @@ const URL = window.location.href;
 const imageUrl = process.env.REACT_APP_INNHOLDSTJENESTE_IMAGES_URL;
 
 function isEmpty(array?: string[]): boolean {
-  return array === undefined || array.length < 1;
+  return !(array && array.length);
 }
 
 const App = () => {
