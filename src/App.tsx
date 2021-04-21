@@ -1,45 +1,88 @@
-import React, { FC } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import Header from './components/Header';
+import { Innholdsformasjon } from './types';
 import CollapsedBox from './components/CollapsedBox';
-import { TitleLabel, AuthorLabel, ISBNLabel, ImageContainer } from './components/CustomElements';
-import pelsjegere from './resources/pelsjegere.jpg';
+import Header from './components/Header';
+import { ErrorTextField, ImageContainer, ISBNLabel, TitleLabel } from './components/CustomElements';
+import { getInnholdsinformasjon } from './services/api';
 
 const URL = window.location.href;
+const imageUrl = process.env.REACT_APP_INNHOLDSTJENESTE_IMAGES_URL;
 
-const App: FC = () => {
-  const shortSummary =
-    'Etter å ha brutt opp fra sin sakførerpraksis i Norge, reiste Ingstad til arktiske Canada, der han levde i fire år som pelsjeger.';
-  const longSummary =
-    'Etter å ha brutt opp fra sin sakførerpraksis i Norge, reiste Ingstad til arktiske Canada, der han levde i fire år som pelsjeger. Pelsjegerliv er beretningen om hans opplevelser i denne tiden. Boken ble utgitt i 1931  og er hans første av i alt tolv bøker';
-  const tableOfContents = [
-    'The opening',
-    'Second breakfast',
-    "Three's a crowd",
-    'May the fourth be with you',
-    'Cinco de mayo',
-  ];
+function isEmpty(array?: string[]): boolean {
+  return !(array && array.length);
+}
+
+const App = () => {
+  const [innholdsinformasjon, setInnholdsinformasjon] = useState<Innholdsformasjon | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState<Error>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const searchQuery = new URLSearchParams(window.location.search);
+      const isbn = searchQuery.get('isbn');
+      if (!isbn) {
+        setLoadingError(new Error(`Resource not found. \nParameter specifying isbn was not provided.`));
+        return;
+      }
+      try {
+        setIsLoading(true);
+        setLoadingError(undefined);
+        setInnholdsinformasjon(await getInnholdsinformasjon(isbn));
+      } catch (e) {
+        setLoadingError(new Error('Failed to retrieve the resource, please try again.'));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loadingError) {
+    return <ErrorTextField>{loadingError.message}</ErrorTextField>;
+  }
+
+  if (!innholdsinformasjon) {
+    return !URL.includes('oria') ? <Header /> : null;
+  }
 
   return (
     <>
       {!URL.includes('oria') && <Header />}
-      <TitleLabel>Pelsjegerliv blandt Nord-Canadas indianere</TitleLabel>
-      <ImageContainer src={pelsjegere} alt="Bilde av boken"></ImageContainer>
-      <AuthorLabel>Helge Ingstad</AuthorLabel>
-      <ISBNLabel>ISBN: 9788205377547</ISBNLabel>
-      {shortSummary && (
-        <CollapsedBox name="Beskrivelse fra forlaget (kort)" summary={shortSummary} open={true}></CollapsedBox>
+      {isLoading ? (
+        <progress />
+      ) : (
+        <>
+          <TitleLabel>{innholdsinformasjon.title}</TitleLabel>
+          {imageUrl && innholdsinformasjon.image_small && (
+            <ImageContainer src={imageUrl + innholdsinformasjon.image_small} alt="Bilde av boken" />
+          )}
+          <ISBNLabel>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
+          {!isEmpty(innholdsinformasjon.description_short) && (
+            <CollapsedBox
+              name="Beskrivelse fra forlaget (kort)"
+              contents={innholdsinformasjon.description_short}
+              open={true}
+            />
+          )}
+          {!isEmpty(innholdsinformasjon.description_long) && (
+            <CollapsedBox
+              name="Beskrivelse fra forlaget (lang)"
+              contents={innholdsinformasjon.description_long}
+              open={!isEmpty(innholdsinformasjon.description_long)}
+            />
+          )}
+          {!isEmpty(innholdsinformasjon.table_of_contents) && (
+            <CollapsedBox
+              name="Innholdsfortegnelse"
+              contents={innholdsinformasjon.table_of_contents}
+              open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
+            />
+          )}
+        </>
       )}
-      {longSummary && (
-        <CollapsedBox name="Beskrivelse fra forlaget (lang)" summary={longSummary} open={!shortSummary}></CollapsedBox>
-      )}
-      {tableOfContents && (
-        <CollapsedBox
-          name="Innholdsfortegnelse"
-          contents={tableOfContents}
-          open={!shortSummary && !longSummary}></CollapsedBox>
-      )}
-      <br></br>
+      <br />
     </>
   );
 };
