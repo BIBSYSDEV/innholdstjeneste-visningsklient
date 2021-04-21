@@ -485,7 +485,7 @@ Resources:
             - Name: BuildArtifacts
           Configuration:
             BucketName: !If [IsCreateNewBucketCondition, !Ref WebsiteBucket, !Ref ExistingBucketName]
-#            ObjectKey: '{datetime}/' # TODO
+#            ObjectKey: '{datetime}/'
             Extract: true
           RunOrder: 2
         - Name: InvalidateDistribution
