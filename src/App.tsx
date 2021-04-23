@@ -8,6 +8,7 @@ import { getInnholdsinformasjon } from './services/api';
 
 const URL = window.location.href;
 const imageUrl = process.env.REACT_APP_INNHOLDSTJENESTE_IMAGES_URL;
+const oriaKeyword = 'oria';
 
 function isEmpty(array?: string[]): boolean {
   return !(array && array.length);
@@ -44,23 +45,30 @@ const App = () => {
   }
 
   if (!innholdsinformasjon) {
-    return !URL.includes('oria') ? <Header /> : null;
+    return !URL.includes(oriaKeyword) ? <Header /> : null;
   }
 
   return (
     <>
-      {!URL.includes('oria') && <Header />}
+      {!URL.includes(oriaKeyword) && <Header />}
       {isLoading ? (
         <progress />
       ) : (
         <>
-          <TitleLabel>{innholdsinformasjon.title}</TitleLabel>
+          <TitleLabel className={URL.includes(oriaKeyword) ? oriaKeyword : ''}>{innholdsinformasjon.title}</TitleLabel>
           {imageUrl && innholdsinformasjon.image_small && (
-            <ImageContainer src={imageUrl + innholdsinformasjon.image_small} alt="Bilde av boken" />
+            <ImageContainer
+              className={URL.includes(oriaKeyword) ? oriaKeyword : ''}
+              src={imageUrl + innholdsinformasjon.image_small}
+              alt="Bilde av boken"
+            />
           )}
-          <ISBNLabel>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
+          <ISBNLabel className={URL.includes(oriaKeyword) ? oriaKeyword : ''}>
+            ISBN: {innholdsinformasjon.isbn}
+          </ISBNLabel>
           {!isEmpty(innholdsinformasjon.description_short) && (
             <CollapsedBox
+              className={URL.includes(oriaKeyword) ? oriaKeyword : ''}
               name="Beskrivelse fra forlaget (kort)"
               contents={innholdsinformasjon.description_short}
               open={true}
@@ -68,6 +76,7 @@ const App = () => {
           )}
           {!isEmpty(innholdsinformasjon.description_long) && (
             <CollapsedBox
+              className={URL.includes(oriaKeyword) ? oriaKeyword : ''}
               name="Beskrivelse fra forlaget (lang)"
               contents={innholdsinformasjon.description_long}
               open={!isEmpty(innholdsinformasjon.description_long)}
@@ -75,6 +84,7 @@ const App = () => {
           )}
           {!isEmpty(innholdsinformasjon.table_of_contents) && (
             <CollapsedBox
+              className={URL.includes(oriaKeyword) ? oriaKeyword : ''}
               name="Innholdsfortegnelse"
               contents={innholdsinformasjon.table_of_contents}
               open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}

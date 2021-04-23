@@ -58,4 +58,4 @@ artifacts:
 
 cache:
   paths:
-    - '/node_modules/**/*' # TODO should we cache this path?
+    - '/node_modules/**/*'

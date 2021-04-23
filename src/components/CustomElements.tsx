@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const CollapseContainer = styled.div`
-  background-color: white;
+  &.oria {
+    background-color: rgba(83, 115, 140, 0.9);
+  }
   width: 65%;
   margin-top: 1rem;
   margin-left: 1rem;
@@ -58,6 +60,8 @@ export const CollapsedContents = styled.ul`
 `;
 
 export const TitleLabel = styled.h1`
+  &.oria {
+  }
   font-family: Barlow, sans-serif;
   font-size: 30px;
   font-weight: Bold;
@@ -68,6 +72,8 @@ export const TitleLabel = styled.h1`
 `;
 
 export const ISBNLabel = styled.h2`
+  &.oria {
+  }
   display: inline-block;
   font-family: Barlow, sans-serif;
   font-size: 20px;
