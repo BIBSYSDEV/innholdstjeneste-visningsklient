@@ -60,10 +60,10 @@ const App = () => {
       ) : (
         <>
           <TitleLabel className={getClassNameBasedOnURL()}>{innholdsinformasjon.title}</TitleLabel>
-          {imageUrl && innholdsinformasjon.image_small && (
+          {imageUrl && innholdsinformasjon.image_path && (
             <ImageContainer
               className={getClassNameBasedOnURL()}
-              src={imageUrl + innholdsinformasjon.image_small}
+              src={imageUrl + innholdsinformasjon.image_path}
               alt="Bilde av boken"
             />
           )}
@@ -81,7 +81,7 @@ const App = () => {
               className={getClassNameBasedOnURL()}
               name="Beskrivelse fra forlaget (lang)"
               contents={innholdsinformasjon.description_long}
-              open={!isEmpty(innholdsinformasjon.description_long)}
+              open={isEmpty(innholdsinformasjon.description_short)}
             />
           )}
           {!isEmpty(innholdsinformasjon.table_of_contents) && (

@@ -33,8 +33,7 @@ const Divider = styled.span`
 const LogoImgWrapper = styled.img`
   margin-right: 1rem;
   height: auto;
-  max-height: 100%;
-  width: 20%;
+  max-height: 50%;
 `;
 
 const Header: FC = () => {
@@ -44,7 +43,7 @@ const Header: FC = () => {
         Innholdsinformasjon <Divider />
       </Title>
 
-      <LogoImgWrapper src={UnitLogo} alt="Unit logo"></LogoImgWrapper>
+      <LogoImgWrapper src={UnitLogo} alt="Unit logo" />
     </Bar>
   );
 };
