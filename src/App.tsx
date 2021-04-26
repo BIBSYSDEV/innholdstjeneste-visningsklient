@@ -48,6 +48,10 @@ const App = () => {
     return !URL.includes(oriaKeyword) ? <Header /> : null;
   }
 
+  function getClassNameBasedOnURL() {
+    return URL.includes(oriaKeyword) ? oriaKeyword : '';
+  }
+
   return (
     <>
       {!URL.includes(oriaKeyword) && <Header />}
@@ -55,20 +59,18 @@ const App = () => {
         <progress />
       ) : (
         <>
-          <TitleLabel className={URL.includes(oriaKeyword) ? oriaKeyword : ''}>{innholdsinformasjon.title}</TitleLabel>
+          <TitleLabel className={getClassNameBasedOnURL()}>{innholdsinformasjon.title}</TitleLabel>
           {imageUrl && innholdsinformasjon.image_small && (
             <ImageContainer
-              className={URL.includes(oriaKeyword) ? oriaKeyword : ''}
+              className={getClassNameBasedOnURL()}
               src={imageUrl + innholdsinformasjon.image_small}
               alt="Bilde av boken"
             />
           )}
-          <ISBNLabel className={URL.includes(oriaKeyword) ? oriaKeyword : ''}>
-            ISBN: {innholdsinformasjon.isbn}
-          </ISBNLabel>
+          <ISBNLabel className={getClassNameBasedOnURL()}>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
           {!isEmpty(innholdsinformasjon.description_short) && (
             <CollapsedBox
-              className={URL.includes(oriaKeyword) ? oriaKeyword : ''}
+              className={getClassNameBasedOnURL()}
               name="Beskrivelse fra forlaget (kort)"
               contents={innholdsinformasjon.description_short}
               open={true}
@@ -76,7 +78,7 @@ const App = () => {
           )}
           {!isEmpty(innholdsinformasjon.description_long) && (
             <CollapsedBox
-              className={URL.includes(oriaKeyword) ? oriaKeyword : ''}
+              className={getClassNameBasedOnURL()}
               name="Beskrivelse fra forlaget (lang)"
               contents={innholdsinformasjon.description_long}
               open={!isEmpty(innholdsinformasjon.description_long)}
@@ -84,7 +86,7 @@ const App = () => {
           )}
           {!isEmpty(innholdsinformasjon.table_of_contents) && (
             <CollapsedBox
-              className={URL.includes(oriaKeyword) ? oriaKeyword : ''}
+              className={getClassNameBasedOnURL()}
               name="Innholdsfortegnelse"
               contents={innholdsinformasjon.table_of_contents}
               open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
