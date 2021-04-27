@@ -12,7 +12,11 @@ export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsform
     return innholdsinformasjon;
   }
   innholdsinformasjon.title = innholdResponse.title;
-  innholdsinformasjon.image_small = innholdResponse.image_small;
+  innholdsinformasjon.image_path = getImagePath(
+    innholdResponse.image_small,
+    innholdResponse.image_original,
+    innholdResponse.image_large
+  );
   innholdsinformasjon.description_short = splitOnTags(innholdResponse.description_short).map(removeAllTags);
   innholdsinformasjon.description_long = splitOnTags(innholdResponse.description_long).map(removeAllTags);
   innholdsinformasjon.table_of_contents = splitOnTags(innholdResponse.table_of_contents).map(removeAllTags);
@@ -20,13 +24,21 @@ export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsform
   return innholdsinformasjon;
 };
 
-function removeAllTags(value: string) {
-  return value.replace(/(<([^>]+)>)/gi, '');
-}
+const getImagePath = (small: string, original: string, large: string) => {
+  if (small) {
+    return small;
+  } else {
+    return original ? original : large;
+  }
+};
 
-function splitOnTags(field: string) {
+const removeAllTags = (value: string) => {
+  return value.replace(/(<([^>]+)>)/gi, '');
+};
+
+const splitOnTags = (field: string) => {
   if (field) {
     return field.split('<br>').join('###').split('<p>').join('###').split('<li>').join('###').split('###');
   }
   return [];
-}
+};

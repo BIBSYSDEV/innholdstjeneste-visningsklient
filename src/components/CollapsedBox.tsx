@@ -6,9 +6,10 @@ interface CollapsedBoxProps {
   summary?: string;
   contents?: string[];
   open: boolean;
+  className: string;
 }
 
-const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, open }) => {
+const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, open, className }) => {
   const [collapsed, setcollapsed] = useState(!open);
 
   const handleButtonClick = () => {
@@ -16,7 +17,7 @@ const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, open }) 
   };
 
   return (
-    <CollapseContainer>
+    <CollapseContainer className={className}>
       <CollapseButton aria-expanded={!collapsed} role="knapp" onClick={handleButtonClick}>
         {!collapsed ? '▼' : '▶'} {name}
       </CollapseButton>

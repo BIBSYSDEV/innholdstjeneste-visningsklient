@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const CollapseContainer = styled.div`
-  background-color: white;
   width: 65%;
   margin-top: 1rem;
   margin-left: 1rem;
@@ -11,6 +10,9 @@ export const CollapseContainer = styled.div`
   padding-bottom: 0.5rem;
   border-radius: 5px;
   border: solid rgb(40, 75, 99);
+  &.oria {
+    background-color: rgba(83, 115, 140, 0.9);
+  }
 `;
 
 export const CollapseButton = styled.button`
@@ -65,6 +67,8 @@ export const TitleLabel = styled.h1`
   margin-right: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  &.oria {
+  }
 `;
 
 export const ISBNLabel = styled.h2`
@@ -75,6 +79,8 @@ export const ISBNLabel = styled.h2`
   margin-left: 1rem;
   margin-top: 0;
   margin-bottom: 0;
+  &.oria {
+  }
 `;
 
 export const ImageContainer = styled.img`

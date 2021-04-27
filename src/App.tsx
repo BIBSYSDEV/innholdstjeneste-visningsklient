@@ -8,6 +8,7 @@ import { getInnholdsinformasjon } from './services/api';
 
 const URL = window.location.href;
 const imageUrl = process.env.REACT_APP_INNHOLDSTJENESTE_IMAGES_URL;
+const oriaKeyword = 'oria';
 
 function isEmpty(array?: string[]): boolean {
   return !(array && array.length);
@@ -44,23 +45,32 @@ const App = () => {
   }
 
   if (!innholdsinformasjon) {
-    return !URL.includes('oria') ? <Header /> : null;
+    return !URL.includes(oriaKeyword) ? <Header /> : null;
+  }
+
+  function getClassNameBasedOnURL() {
+    return URL.includes(oriaKeyword) ? oriaKeyword : '';
   }
 
   return (
     <>
-      {!URL.includes('oria') && <Header />}
+      {!URL.includes(oriaKeyword) && <Header />}
       {isLoading ? (
         <progress />
       ) : (
         <>
-          <TitleLabel>{innholdsinformasjon.title}</TitleLabel>
-          {imageUrl && innholdsinformasjon.image_small && (
-            <ImageContainer src={imageUrl + innholdsinformasjon.image_small} alt="Bilde av boken" />
+          <TitleLabel className={getClassNameBasedOnURL()}>{innholdsinformasjon.title}</TitleLabel>
+          {imageUrl && innholdsinformasjon.image_path && (
+            <ImageContainer
+              className={getClassNameBasedOnURL()}
+              src={imageUrl + innholdsinformasjon.image_path}
+              alt="Bilde av boken"
+            />
           )}
-          <ISBNLabel>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
+          <ISBNLabel className={getClassNameBasedOnURL()}>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
           {!isEmpty(innholdsinformasjon.description_short) && (
             <CollapsedBox
+              className={getClassNameBasedOnURL()}
               name="Beskrivelse fra forlaget (kort)"
               contents={innholdsinformasjon.description_short}
               open={true}
@@ -68,13 +78,15 @@ const App = () => {
           )}
           {!isEmpty(innholdsinformasjon.description_long) && (
             <CollapsedBox
+              className={getClassNameBasedOnURL()}
               name="Beskrivelse fra forlaget (lang)"
               contents={innholdsinformasjon.description_long}
-              open={!isEmpty(innholdsinformasjon.description_long)}
+              open={isEmpty(innholdsinformasjon.description_short)}
             />
           )}
           {!isEmpty(innholdsinformasjon.table_of_contents) && (
             <CollapsedBox
+              className={getClassNameBasedOnURL()}
               name="Innholdsfortegnelse"
               contents={innholdsinformasjon.table_of_contents}
               open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
