@@ -24,21 +24,21 @@ export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsform
   return innholdsinformasjon;
 };
 
-function getImagePath(small: string, original: string, large: string) {
+const getImagePath = (small: string, original: string, large: string) => {
   if (small) {
     return small;
   } else {
     return original ? original : large;
   }
-}
+};
 
-function removeAllTags(value: string) {
+const removeAllTags = (value: string) => {
   return value.replace(/(<([^>]+)>)/gi, '');
-}
+};
 
-function splitOnTags(field: string) {
+const splitOnTags = (field: string) => {
   if (field) {
     return field.split('<br>').join('###').split('<p>').join('###').split('<li>').join('###').split('###');
   }
   return [];
-}
+};
