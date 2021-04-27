@@ -361,10 +361,6 @@ Resources:
         rules_to_suppress:
           - id: W32
             reason: "Skip encryption for CodeBuild project"
-          - id: W89
-            reason: "The InvalidateCloudfrontDistribution Lambda does not need to be run inside a VPC, as it does not need access to other resources within a VPC"
-          - id: W92
-            reason: "The InvalidateCloudfrontDistribution Lambda does not need to reserve concurrency as it as rarely used and not related to processing of time-critical user requests"
     Properties:
       Artifacts:
         Type: CODEPIPELINE
@@ -524,6 +520,13 @@ Resources:
 
   InvalidateCloudfrontDistribution:
     Type: AWS::Lambda::Function
+    Metadata:
+      cfn_nag:
+        rules_to_suppress:
+          - id: W89
+            reason: "The Lambda does not need to be run inside a VPC, as it does not need access to other resources within a VPC"
+          - id: W92
+            reason: "The Lambda does not need to reserve concurrency as it as rarely used and not related to processing of time-critical user requests"
     Properties:
       Code:
         ZipFile: |
