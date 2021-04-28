@@ -183,9 +183,9 @@ Resources:
             Resource: !Join
               - ''
               - - 'arn:aws:s3:::'
-                - !GetAtt ContentsS3Bucket.BucketName
+                - !Ref ContentsS3Bucket
                 - /*
-      Bucket: !GetAtt ContentsS3Bucket.BucketName
+      Bucket: !Ref ContentsS3Bucket
 
   PipelineApprovalTopic:
     Type: AWS::SNS::Topic
@@ -780,7 +780,7 @@ Resources:
                Forward: none
            TargetOriginId: !Sub
              - 'S3-${ContentsS3Bucket}'
-             - ContentsS3Bucket: !GetAtt ContentsS3Bucket.BucketName
+             - ContentsS3Bucket: !Ref ContentsS3Bucket
            ViewerProtocolPolicy: redirect-to-https
            PathPattern: files/*
         DefaultRootObject: 'index.html'
@@ -823,10 +823,10 @@ Resources:
 #            OriginPath: /timestamp # TODO
           - DomainName: !Sub
             - '${ContentsS3Bucket}.s3.${AWS::Region}.amazonaws.com'
-            - ContentsS3Bucket: !GetAtt ContentsS3Bucket.BucketName
+            - ContentsS3Bucket: !Ref ContentsS3Bucket
             Id: !Sub
               - 'S3-${ContentsS3Bucket}'
-              - ContentsS3Bucket: !GetAtt ContentsS3Bucket.BucketName
+              - ContentsS3Bucket: !Ref ContentsS3Bucket
             S3OriginConfig:
               OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}'
               #OriginPath: /timestamp # TODO
