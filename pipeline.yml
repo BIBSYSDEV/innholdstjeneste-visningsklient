@@ -756,33 +756,33 @@ Resources:
             - 'S3-${WebsiteBucketName}'
             - WebsiteBucketName: !If [IsCreateNewBucketCondition, !Ref WebsiteBucket, !Ref ExistingBucketName]
           ViewerProtocolPolicy: redirect-to-https
-        CacheBehavior:
-        -  AllowedMethods: ["GET", "HEAD", "OPTIONS"]
-           CachedMethods: ["GET", "HEAD", "OPTIONS"]
-           Compress: true
-           DefaultTTL: 0
-           ForwardedValues:
-             QueryString: false
-             Cookies:
-               Forward: none
-           TargetOriginId: !Sub
-             - 'S3-${WebsiteBucketName}'
-             - WebsiteBucketName: !If [IsCreateNewBucketCondition, !Ref WebsiteBucket, !Ref ExistingBucketName]
-           ViewerProtocolPolicy: redirect-to-https
-           PathPattern: content/*
-        -  AllowedMethods: ["GET", "HEAD", "OPTIONS"]
-           CachedMethods: ["GET", "HEAD", "OPTIONS"]
-           Compress: true
-           DefaultTTL: 0
-           ForwardedValues:
-             QueryString: false
-             Cookies:
-               Forward: none
-           TargetOriginId: !Sub
-             - 'S3-${ContentsS3Bucket}'
-             - ContentsS3Bucket: !Ref ContentsS3Bucket
-           ViewerProtocolPolicy: redirect-to-https
-           PathPattern: files/*
+        CacheBehaviors:
+        - AllowedMethods: ["GET", "HEAD", "OPTIONS"]
+          CachedMethods: ["GET", "HEAD", "OPTIONS"]
+          Compress: true
+          DefaultTTL: 0
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+          TargetOriginId: !Sub
+            - 'S3-${WebsiteBucketName}'
+            - WebsiteBucketName: !If [IsCreateNewBucketCondition, !Ref WebsiteBucket, !Ref ExistingBucketName]
+          ViewerProtocolPolicy: redirect-to-https
+          PathPattern: content/*
+        - AllowedMethods: ["GET", "HEAD", "OPTIONS"]
+          CachedMethods: ["GET", "HEAD", "OPTIONS"]
+          Compress: true
+          DefaultTTL: 0
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+          TargetOriginId: !Sub
+            - 'S3-${ContentsS3Bucket}'
+            - ContentsS3Bucket: !Ref ContentsS3Bucket
+          ViewerProtocolPolicy: redirect-to-https
+          PathPattern: files/*
         DefaultRootObject: 'index.html'
         PriceClass: PriceClass_100
         Restrictions:
