@@ -115,6 +115,18 @@ Conditions:
   IsCreateNewBucketCondition: !Equals [!Ref ExistingBucketName, '']
 
 Resources:
+
+  ContentsS3StorageNameParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /contents/s3-storage-name
+      Type: String
+      Value: !Join
+        - '-'
+        - - 'contents-backend-s3-storage'
+          - '{{resolve:ssm:environment:1}}'
+      Description: Name of the S3-bucket to store images and audio files
+
   ArtifactsBucket:
     Type: 'AWS::S3::Bucket'
     Metadata:
@@ -145,6 +157,35 @@ Resources:
             Transition:
               StorageClass: INTELLIGENT_TIERING
               TransitionInDays: 30
+
+  ContentsS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Join
+        - '-'
+        - - 'contents-backend-s3-storage'
+          - '{{resolve:ssm:environment:1}}'
+      AccessControl: PublicRead
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+
+  ContentsS3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Id: BucketPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Join
+              - ''
+              - - 'arn:aws:s3:::'
+                - !GetAtt ContentsS3Bucket.BucketName
+                - /*
+      Bucket: !GetAtt ContentsS3Bucket.BucketName
 
   PipelineApprovalTopic:
     Type: AWS::SNS::Topic
@@ -715,6 +756,33 @@ Resources:
             - 'S3-${WebsiteBucketName}'
             - WebsiteBucketName: !If [IsCreateNewBucketCondition, !Ref WebsiteBucket, !Ref ExistingBucketName]
           ViewerProtocolPolicy: redirect-to-https
+        CacheBehavior:
+        -  AllowedMethods: ["GET", "HEAD", "OPTIONS"]
+           CachedMethods: ["GET", "HEAD", "OPTIONS"]
+           Compress: true
+           DefaultTTL: 0
+           ForwardedValues:
+             QueryString: false
+             Cookies:
+               Forward: none
+           TargetOriginId: !Sub
+             - 'S3-${WebsiteBucketName}'
+             - WebsiteBucketName: !If [IsCreateNewBucketCondition, !Ref WebsiteBucket, !Ref ExistingBucketName]
+           ViewerProtocolPolicy: redirect-to-https
+           PathPattern: content/*
+        -  AllowedMethods: ["GET", "HEAD", "OPTIONS"]
+           CachedMethods: ["GET", "HEAD", "OPTIONS"]
+           Compress: true
+           DefaultTTL: 0
+           ForwardedValues:
+             QueryString: false
+             Cookies:
+               Forward: none
+           TargetOriginId: !Sub
+             - 'S3-${ContentsS3Bucket}'
+             - ContentsS3Bucket: !GetAtt ContentsS3Bucket.BucketName
+           ViewerProtocolPolicy: redirect-to-https
+           PathPattern: files/*
         DefaultRootObject: 'index.html'
         PriceClass: PriceClass_100
         Restrictions:
@@ -752,7 +820,16 @@ Resources:
               - WebsiteBucketName: !If [IsCreateNewBucketCondition, !Ref WebsiteBucket, !Ref ExistingBucketName]
             S3OriginConfig:
               OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}'
-            #OriginPath: /timestamp # TODO
+#            OriginPath: /timestamp # TODO
+          - DomainName: !Sub
+            - '${ContentsS3Bucket}.s3.${AWS::Region}.amazonaws.com'
+            - ContentsS3Bucket: !GetAtt ContentsS3Bucket.BucketName
+            Id: !Sub
+              - 'S3-${ContentsS3Bucket}'
+              - ContentsS3Bucket: !GetAtt ContentsS3Bucket.BucketName
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}'
+              #OriginPath: /timestamp # TODO
 
   CloudFrontAccessLogsBucket:
     Type: AWS::S3::Bucket
