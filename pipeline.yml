@@ -160,6 +160,15 @@ Resources:
 
   ContentsS3Bucket:
     Type: AWS::S3::Bucket
+    Metadata:
+      cfn_nag:
+        rules_to_suppress:
+          - id: W31
+            reason: "Access logging handled by CloudFront"
+          - id: W35
+            reason: "Skip encryption for website bucket"
+          - id: W41
+            reason: "This bucket is public"
     Properties:
       BucketName: !Join
         - '-'
