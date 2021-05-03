@@ -60,6 +60,7 @@ const App = () => {
       ) : (
         <>
           <TitleLabel className={getClassNameBasedOnURL()}>{innholdsinformasjon.title}</TitleLabel>
+          <ISBNLabel className={getClassNameBasedOnURL()}>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
           {imageUrl && innholdsinformasjon.image_path && (
             <ImageContainer
               className={getClassNameBasedOnURL()}
@@ -67,7 +68,6 @@ const App = () => {
               alt="Bilde av boken"
             />
           )}
-          <ISBNLabel className={getClassNameBasedOnURL()}>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
           {!isEmpty(innholdsinformasjon.description_short) && (
             <CollapsedBox
               className={getClassNameBasedOnURL()}

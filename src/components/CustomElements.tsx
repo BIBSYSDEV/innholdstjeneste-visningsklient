@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const CollapseContainer = styled.div`
   width: 65%;
-  margin-top: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
   padding-left: 0.5rem;
@@ -72,13 +71,12 @@ export const TitleLabel = styled.h1`
 `;
 
 export const ISBNLabel = styled.h2`
-  display: inline-block;
   font-family: Barlow, sans-serif;
   font-size: 20px;
   font-weight: 200;
   margin-left: 1rem;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 1rem;
   &.oria {
   }
 `;
