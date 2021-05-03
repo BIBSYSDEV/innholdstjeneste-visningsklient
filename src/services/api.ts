@@ -25,10 +25,10 @@ export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsform
 };
 
 const getImagePath = (small: string, original: string, large: string) => {
-  if (small) {
-    return small;
+  if (large) {
+    return large;
   } else {
-    return original ? original : large;
+    return original ? original : small;
   }
 };
 
