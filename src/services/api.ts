@@ -38,7 +38,16 @@ const removeAllTags = (value: string) => {
 
 const splitOnTags = (field: string) => {
   if (field) {
-    return field.split('<br>').join('###').split('<p>').join('###').split('<li>').join('###').split('###');
+    return field
+      .split('<br>')
+      .join('###')
+      .split('<br />')
+      .join('###')
+      .split('<p>')
+      .join('###')
+      .split('<li>')
+      .join('###')
+      .split('###');
   }
   return [];
 };

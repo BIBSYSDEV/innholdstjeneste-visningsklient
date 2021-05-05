@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const CollapseContainer = styled.div`
   margin-left: 1rem;
   margin-right: 1rem;
+  margin-bottom: 1rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-bottom: 0.5rem;
@@ -81,12 +82,10 @@ export const ISBNLabel = styled.h2`
 `;
 
 export const ImageContainer = styled.img`
-  display: inline;
   margin-right: 1rem;
   margin-left: 1rem;
-  height: auto;
-  width: auto;
-  max-width: 20%;
+  height: 100%;
+  width: fit-content;
 `;
 
 export const ErrorTextField = styled.div`
