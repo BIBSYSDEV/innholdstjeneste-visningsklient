@@ -45,53 +45,57 @@ const App = () => {
   }
 
   if (!innholdsinformasjon) {
-    return !URL.includes(oriaKeyword) ? <Header /> : null;
+    return !oriaParameterIsSet() ? <Header /> : null;
+  }
+
+  function oriaParameterIsSet() {
+    return URL.includes(oriaKeyword);
   }
 
   function getClassNameBasedOnURL() {
-    return URL.includes(oriaKeyword) ? oriaKeyword : '';
+    return oriaParameterIsSet() ? oriaKeyword : '';
   }
 
   return (
     <>
-      {!URL.includes(oriaKeyword) && <Header />}
+      {!oriaParameterIsSet() && <Header />}
       {isLoading ? (
         <progress />
       ) : (
         <>
           <TitleLabel className={getClassNameBasedOnURL()}>{innholdsinformasjon.title}</TitleLabel>
           <ISBNLabel className={getClassNameBasedOnURL()}>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
-          {imageUrl && innholdsinformasjon.image_path && (
-            <ImageContainer
-              className={getClassNameBasedOnURL()}
-              src={imageUrl + innholdsinformasjon.image_path}
-              alt="Bilde av boken"
-            />
-          )}
-          {!isEmpty(innholdsinformasjon.description_short) && (
-            <CollapsedBox
-              className={getClassNameBasedOnURL()}
-              name="Beskrivelse fra forlaget (kort)"
-              contents={innholdsinformasjon.description_short}
-              open={true}
-            />
-          )}
-          {!isEmpty(innholdsinformasjon.description_long) && (
-            <CollapsedBox
-              className={getClassNameBasedOnURL()}
-              name="Beskrivelse fra forlaget (lang)"
-              contents={innholdsinformasjon.description_long}
-              open={isEmpty(innholdsinformasjon.description_short)}
-            />
-          )}
-          {!isEmpty(innholdsinformasjon.table_of_contents) && (
-            <CollapsedBox
-              className={getClassNameBasedOnURL()}
-              name="Innholdsfortegnelse"
-              contents={innholdsinformasjon.table_of_contents}
-              open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
-            />
-          )}
+          <div className={'content-wrapper'}>
+            <div className={'collapsed-boxes'}>
+              {!isEmpty(innholdsinformasjon.description_short) && (
+                <CollapsedBox
+                  className={getClassNameBasedOnURL()}
+                  name="Beskrivelse fra forlaget (kort)"
+                  contents={innholdsinformasjon.description_short}
+                  open={true}
+                />
+              )}
+              {!isEmpty(innholdsinformasjon.description_long) && (
+                <CollapsedBox
+                  className={getClassNameBasedOnURL()}
+                  name="Beskrivelse fra forlaget (lang)"
+                  contents={innholdsinformasjon.description_long}
+                  open={isEmpty(innholdsinformasjon.description_short)}
+                />
+              )}
+              {!isEmpty(innholdsinformasjon.table_of_contents) && (
+                <CollapsedBox
+                  className={getClassNameBasedOnURL()}
+                  name="Innholdsfortegnelse"
+                  contents={innholdsinformasjon.table_of_contents}
+                  open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
+                />
+              )}
+            </div>
+            {imageUrl && !oriaParameterIsSet() && innholdsinformasjon.image_path && (
+              <ImageContainer src={imageUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
+            )}
+          </div>
         </>
       )}
       <br />

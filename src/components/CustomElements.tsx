@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const CollapseContainer = styled.div`
-  width: 65%;
   margin-left: 1rem;
   margin-right: 1rem;
   padding-left: 0.5rem;
@@ -83,8 +82,8 @@ export const ISBNLabel = styled.h2`
 
 export const ImageContainer = styled.img`
   display: inline;
-  float: right;
   margin-right: 1rem;
+  margin-left: 1rem;
   height: auto;
   width: auto;
   max-width: 20%;
