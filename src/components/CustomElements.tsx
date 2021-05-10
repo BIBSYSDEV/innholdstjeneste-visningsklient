@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
 export const CollapseContainer = styled.div`
-  width: 65%;
-  margin-top: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
+  margin-bottom: 1rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-bottom: 0.5rem;
@@ -72,24 +71,21 @@ export const TitleLabel = styled.h1`
 `;
 
 export const ISBNLabel = styled.h2`
-  display: inline-block;
   font-family: Barlow, sans-serif;
   font-size: 20px;
   font-weight: 200;
   margin-left: 1rem;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 1rem;
   &.oria {
   }
 `;
 
 export const ImageContainer = styled.img`
-  display: inline;
-  float: right;
   margin-right: 1rem;
-  height: auto;
-  width: auto;
-  max-width: 20%;
+  margin-left: 1rem;
+  height: 100%;
+  width: fit-content;
 `;
 
 export const ErrorTextField = styled.div`

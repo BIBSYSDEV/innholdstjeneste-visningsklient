@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+require('iframe-resizer');
 
 ReactDOM.render(
   <React.StrictMode>
