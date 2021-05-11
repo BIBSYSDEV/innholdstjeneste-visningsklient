@@ -52,7 +52,7 @@ const App = () => {
     let isbn = searchQuery.get('isbn');
     if (!isbn) {
       let path = window.location.pathname;
-      if (path.substring(path.length - 1) == '/') {
+      if (path.substring(path.length - 1) === '/') {
         path = path.substring(0, path.length - 1);
       }
       isbn = path.substring(path.lastIndexOf('/') + 1);
