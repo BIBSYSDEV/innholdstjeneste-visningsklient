@@ -21,8 +21,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const searchQuery = new URLSearchParams(window.location.search);
-      const isbn = searchQuery.get('isbn');
+      const isbn = getIsbnFromQueryOrPath();
       if (!isbn) {
         setLoadingError(new Error(`Resource not found. \nParameter specifying isbn was not provided.`));
         return;
@@ -46,6 +45,19 @@ const App = () => {
 
   if (!innholdsinformasjon) {
     return !oriaParameterIsSet() ? <Header /> : null;
+  }
+
+  function getIsbnFromQueryOrPath() {
+    const searchQuery = new URLSearchParams(window.location.search);
+    let isbn = searchQuery.get('isbn');
+    if (!isbn) {
+      let path = window.location.pathname;
+      if (path.substring(path.length - 1) == '/') {
+        path = path.substring(0, path.length - 1);
+      }
+      isbn = path.substring(path.lastIndexOf('/') + 1);
+    }
+    return isbn;
   }
 
   function oriaParameterIsSet() {
