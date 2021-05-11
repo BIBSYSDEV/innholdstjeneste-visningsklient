@@ -7,8 +7,7 @@ import { ErrorTextField, ImageContainer, ISBNLabel, TitleLabel, SoundContainer }
 import { getInnholdsinformasjon } from './services/api';
 
 const URL = window.location.href;
-const imageUrl = process.env.REACT_APP_INNHOLDSTJENESTE_IMAGES_URL;
-const audioUrl = process.env.REACT_APP_INNHOLDSTJENESTE_IMAGES_URL;
+const filesUrl = process.env.REACT_APP_INNHOLDSTJENESTE_FILES_URL;
 const oriaKeyword = 'oria';
 
 function isEmpty(array?: string[]): boolean {
@@ -93,14 +92,14 @@ const App = () => {
                 />
               )}
             </div>
-            {imageUrl && !oriaParameterIsSet() && innholdsinformasjon.image_path && (
-              <ImageContainer src={imageUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
+            {filesUrl && !oriaParameterIsSet() && innholdsinformasjon.image_path && (
+              <ImageContainer src={filesUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
             )}
           </div>
           {innholdsinformasjon.audio_file != null && (
             <SoundContainer>
               <audio controls>
-                <source src={audioUrl + innholdsinformasjon.audio_file} type="audio/mpeg" />
+                <source src={filesUrl + innholdsinformasjon.audio_file} type="audio/mpeg" />
               </audio>
             </SoundContainer>
           )}
