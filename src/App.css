@@ -37,7 +37,7 @@
   }
 }
 
-@media (max-width:960px) {
+@media (max-width: 960px) {
   .content-wrapper {
     flex-direction: column;
   }
@@ -48,5 +48,6 @@
 }
 
 .collapsed-boxes {
-  min-width: 20rem;
+  width: 75rem;
+  max-width: 95%;
 }
