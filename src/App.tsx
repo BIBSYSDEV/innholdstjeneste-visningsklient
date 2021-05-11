@@ -96,7 +96,7 @@ const App = () => {
               <ImageContainer src={filesUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
             )}
           </div>
-          {innholdsinformasjon.audio_file != null && (
+          {innholdsinformasjon.audio_file && (
             <SoundContainer>
               <audio controls>
                 <source src={filesUrl + innholdsinformasjon.audio_file} type="audio/mpeg" />
