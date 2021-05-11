@@ -3,11 +3,12 @@ import './App.css';
 import { Innholdsformasjon } from './types';
 import CollapsedBox from './components/CollapsedBox';
 import Header from './components/Header';
-import { ErrorTextField, ImageContainer, ISBNLabel, TitleLabel } from './components/CustomElements';
+import { ErrorTextField, ImageContainer, ISBNLabel, TitleLabel, SoundContainer } from './components/CustomElements';
 import { getInnholdsinformasjon } from './services/api';
 
 const URL = window.location.href;
 const imageUrl = process.env.REACT_APP_INNHOLDSTJENESTE_IMAGES_URL;
+const audioUrl = process.env.REACT_APP_INNHOLDSTJENESTE_IMAGES_URL;
 const oriaKeyword = 'oria';
 
 function isEmpty(array?: string[]): boolean {
@@ -96,6 +97,13 @@ const App = () => {
               <ImageContainer src={imageUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
             )}
           </div>
+          {innholdsinformasjon.audio_file != null && (
+            <SoundContainer>
+              <audio controls>
+                <source src={audioUrl + innholdsinformasjon.audio_file} type="audio/mpeg" />
+              </audio>
+            </SoundContainer>
+          )}
         </>
       )}
       <br />

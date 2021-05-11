@@ -92,3 +92,8 @@ export const ErrorTextField = styled.div`
   white-space: pre-line;
   font-weight: Bold;
 `;
+
+export const SoundContainer = styled.div`
+  margin-top: 1rem;
+  margin-left: 1rem;
+`;

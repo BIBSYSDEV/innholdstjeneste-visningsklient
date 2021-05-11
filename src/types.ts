@@ -5,4 +5,5 @@ export interface Innholdsformasjon {
   description_long?: string[];
   table_of_contents?: string[];
   image_path?: string;
+  audio_file?: string;
 }
