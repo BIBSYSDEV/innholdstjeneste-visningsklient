@@ -93,7 +93,12 @@ export const ErrorTextField = styled.div`
   font-weight: Bold;
 `;
 
-export const SoundContainer = styled.div`
-  margin-top: 1rem;
-  margin-left: 1rem;
+export const CollapsedAudio = styled.div`
+  background-color: white;
+  font-family: Barlow, sans-serif;
+  font-size: 15px;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  padding: 1rem;
+  border-radius: 5px;
 `;

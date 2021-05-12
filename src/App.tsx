@@ -3,7 +3,8 @@ import './App.css';
 import { Innholdsformasjon } from './types';
 import CollapsedBox from './components/CollapsedBox';
 import Header from './components/Header';
-import { ErrorTextField, ImageContainer, ISBNLabel, TitleLabel, SoundContainer } from './components/CustomElements';
+import Footer from './components/Footer';
+import { ErrorTextField, ImageContainer, ISBNLabel, TitleLabel } from './components/CustomElements';
 import { getInnholdsinformasjon } from './services/api';
 
 const URL = window.location.href;
@@ -91,21 +92,22 @@ const App = () => {
                   open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
                 />
               )}
+              {filesUrl && innholdsinformasjon.audio_file && (
+                <CollapsedBox
+                  className={getClassNameBasedOnURL()}
+                  name="Lydutdrag"
+                  mp3File={filesUrl + innholdsinformasjon.audio_file}
+                  open={false}
+                />
+              )}
             </div>
             {filesUrl && !oriaParameterIsSet() && innholdsinformasjon.image_path && (
               <ImageContainer src={filesUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
             )}
           </div>
-          {innholdsinformasjon.audio_file && (
-            <SoundContainer>
-              <audio controls>
-                <source src={filesUrl + innholdsinformasjon.audio_file} type="audio/mpeg" />
-              </audio>
-            </SoundContainer>
-          )}
         </>
       )}
-      <br />
+      <Footer />
     </>
   );
 };
