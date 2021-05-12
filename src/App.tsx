@@ -3,11 +3,12 @@ import './App.css';
 import { Innholdsformasjon } from './types';
 import CollapsedBox from './components/CollapsedBox';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import { ErrorTextField, ImageContainer, ISBNLabel, TitleLabel } from './components/CustomElements';
 import { getInnholdsinformasjon } from './services/api';
 
 const URL = window.location.href;
-const imageUrl = process.env.REACT_APP_INNHOLDSTJENESTE_IMAGES_URL;
+const filesUrl = process.env.REACT_APP_INNHOLDSTJENESTE_FILES_URL;
 const oriaKeyword = 'oria';
 
 function isEmpty(array?: string[]): boolean {
@@ -91,14 +92,22 @@ const App = () => {
                   open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
                 />
               )}
+              {filesUrl && innholdsinformasjon.audio_file && (
+                <CollapsedBox
+                  className={getClassNameBasedOnURL()}
+                  name="Lydutdrag"
+                  mp3File={filesUrl + innholdsinformasjon.audio_file}
+                  open={false}
+                />
+              )}
             </div>
-            {imageUrl && !oriaParameterIsSet() && innholdsinformasjon.image_path && (
-              <ImageContainer src={imageUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
+            {filesUrl && !oriaParameterIsSet() && innholdsinformasjon.image_path && (
+              <ImageContainer src={filesUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
             )}
           </div>
         </>
       )}
-      <br />
+      <Footer />
     </>
   );
 };

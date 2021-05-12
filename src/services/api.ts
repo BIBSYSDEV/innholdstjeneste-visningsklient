@@ -21,6 +21,8 @@ export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsform
   innholdsinformasjon.description_long = splitOnSomeTags(innholdResponse.description_long).map(removeAllTags);
   innholdsinformasjon.table_of_contents = splitOnSomeTags(innholdResponse.table_of_contents).map(removeAllTags);
 
+  innholdsinformasjon.audio_file = innholdResponse.audio_file ?? null;
+
   return innholdsinformasjon;
 };
 
