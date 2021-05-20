@@ -1,15 +1,22 @@
 import React, { FC, useState } from 'react';
-import { CollapseContainer, CollapseButton, CollapsedSummary, CollapsedContents } from './CustomElements';
+import {
+  CollapseContainer,
+  CollapseButton,
+  CollapsedSummary,
+  CollapsedContents,
+  CollapsedAudio,
+} from './CustomElements';
 
 interface CollapsedBoxProps {
   name: string;
   summary?: string;
   contents?: string[];
+  mp3File?: string;
   open: boolean;
   className: string;
 }
 
-const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, open, className }) => {
+const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, mp3File, open, className }) => {
   const [collapsed, setcollapsed] = useState(!open);
 
   const handleButtonClick = () => {
@@ -28,6 +35,13 @@ const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, open, cl
             return <p key={index}>{value}</p>;
           })}
         </CollapsedContents>
+      )}
+      {!collapsed && mp3File && (
+        <CollapsedAudio>
+          <audio controls controlsList="nodownload">
+            <source src={mp3File} type="audio/mpeg" />
+          </audio>
+        </CollapsedAudio>
       )}
     </CollapseContainer>
   );
