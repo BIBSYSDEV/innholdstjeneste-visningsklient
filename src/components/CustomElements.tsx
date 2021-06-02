@@ -10,7 +10,6 @@ export const CollapseContainer = styled.div`
   border-radius: 5px;
   border: solid rgb(40, 75, 99);
   &.oria {
-    background-color: rgba(83, 115, 140, 0.9);
   }
 `;
 

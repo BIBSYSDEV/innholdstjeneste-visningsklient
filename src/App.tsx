@@ -69,13 +69,18 @@ const App = () => {
 
   return (
     <>
-      {!oriaParameterIsSet() && <Header />}
       {isLoading ? (
         <progress />
       ) : (
         <>
-          <TitleLabel className={getClassNameBasedOnURL()}>{innholdsinformasjon.title}</TitleLabel>
-          <ISBNLabel className={getClassNameBasedOnURL()}>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
+          {!oriaParameterIsSet() && (
+            <>
+              <Header />
+              <TitleLabel className={getClassNameBasedOnURL()}>{innholdsinformasjon.title}</TitleLabel>
+              <ISBNLabel className={getClassNameBasedOnURL()}>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
+            </>
+          )}
+
           <div className={'content-wrapper'}>
             <div className={'collapsed-boxes'}>
               {!isEmpty(innholdsinformasjon.description_short) && (
