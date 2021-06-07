@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Bar = styled.div`
   height: 2rem;
-  width: 100%;
+  width: 95%;
   align-items: center;
   color: rgba(150, 150, 150, 1);
   text-align: left;
