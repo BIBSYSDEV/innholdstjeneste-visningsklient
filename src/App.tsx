@@ -122,7 +122,7 @@ const App = () => {
           </div>
         </>
       )}
-      <Footer />
+      <Footer source={innholdsinformasjon.source} />
     </>
   );
 };

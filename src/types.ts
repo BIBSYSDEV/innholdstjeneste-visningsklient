@@ -6,4 +6,5 @@ export interface Innholdsformasjon {
   table_of_contents?: string[];
   image_path?: string;
   audio_file?: string;
+  source?: string;
 }
