@@ -31,13 +31,13 @@ export function getSourceType(src: string) {
 }
 
 interface FooterProps {
-  source: string;
+  source?: string;
 }
 
 const Footer: FC<FooterProps> = ({ source }) => {
   return (
     <StyledBar>
-      <StyledSourceText>Kilde: {getSourceType(source)}</StyledSourceText>
+      <StyledSourceText>Kilde: {getSourceType(source ?? '')}</StyledSourceText>
       Det er <strong>IKKE</strong> tillatt å kopiere/laste ned innholdsinformasjon (bilde, beskrivelse,
       innholdsfortegnelse, lydfiler m.m.) og bruke det i andre sammenhenger/tjenester.
     </StyledBar>
