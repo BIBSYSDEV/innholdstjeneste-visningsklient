@@ -23,6 +23,8 @@ export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsform
 
   innholdsinformasjon.audio_file = innholdResponse.audio_file ?? null;
 
+  innholdsinformasjon.source = innholdResponse.source;
+
   return innholdsinformasjon;
 };
 
