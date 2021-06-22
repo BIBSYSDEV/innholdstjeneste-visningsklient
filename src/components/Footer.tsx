@@ -37,7 +37,7 @@ interface FooterProps {
 const Footer: FC<FooterProps> = (props) => {
   return (
     <Bar>
-      <Source>Kilder: {getSourceType(props.source)}</Source>
+      <Source>Kilde: {getSourceType(props.source)}</Source>
       Det er <strong>IKKE</strong> tillatt å kopiere/laste ned innholdsinformasjon (bilde, beskrivelse,
       innholdsfortegnelse, lydfiler m.m.) og bruke det i andre sammenhenger/tjenester.
     </Bar>
