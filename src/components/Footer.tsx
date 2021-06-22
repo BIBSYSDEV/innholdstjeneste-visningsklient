@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const Bar = styled.div`
+const StyledBar = styled.div`
   height: 2rem;
   width: 95%;
   align-items: center;
@@ -11,11 +11,11 @@ const Bar = styled.div`
   font-size: 11px;
   font-style: italic;
   padding-left: 1rem;
-  padding-bottom: 1em;
+  padding-bottom: 1rem;
 `;
 
-const Source = styled.div`
-  padding-bottom: 1em;
+const StyledSourceText = styled.div`
+  padding-bottom: 1rem;
 `;
 
 export function getSourceType(src: string) {
@@ -36,11 +36,11 @@ interface FooterProps {
 
 const Footer: FC<FooterProps> = (props) => {
   return (
-    <Bar>
-      <Source>Kilde: {getSourceType(props.source)}</Source>
+    <StyledBar>
+      <StyledSourceText>Kilde: {getSourceType(props.source)}</StyledSourceText>
       Det er <strong>IKKE</strong> tillatt å kopiere/laste ned innholdsinformasjon (bilde, beskrivelse,
       innholdsfortegnelse, lydfiler m.m.) og bruke det i andre sammenhenger/tjenester.
-    </Bar>
+    </StyledBar>
   );
 };
 
