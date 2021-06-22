@@ -34,10 +34,10 @@ interface FooterProps {
   source: string;
 }
 
-const Footer: FC<FooterProps> = (props) => {
+const Footer: FC<FooterProps> = ({ source }) => {
   return (
     <StyledBar>
-      <StyledSourceText>Kilde: {getSourceType(props.source)}</StyledSourceText>
+      <StyledSourceText>Kilde: {getSourceType(source)}</StyledSourceText>
       Det er <strong>IKKE</strong> tillatt å kopiere/laste ned innholdsinformasjon (bilde, beskrivelse,
       innholdsfortegnelse, lydfiler m.m.) og bruke det i andre sammenhenger/tjenester.
     </StyledBar>
