@@ -11,28 +11,33 @@ const Bar = styled.div`
   font-size: 11px;
   font-style: italic;
   padding-left: 1rem;
+  padding-bottom: 1em;
 `;
 
-const Source = styled.p`
-  height: 2rem;
-  width: 95%;
-  align-items: center;
-  color: rgba(0, 0, 0, 1);
-  text-align: left;
-  font-family: Barlow, sans-serif;
-  font-style: normal;
-  font-size: 15px;
-  border-radius: 5px;
+const Source = styled.div`
+  padding-bottom: 1em;
 `;
 
-interface FooterProps {
-  source?: string;
+export function getSourceType(src: string) {
+  switch (src) {
+    case 'NIELSEN':
+      return 'Nielsen BookData';
+    case 'BOKBASEN':
+      return 'Bokbasen';
+    default:
+      //ALMA, ADABAS, BIBSYS
+      return 'Unit';
+  }
 }
 
-const Footer: FC<FooterProps> = ({ source }) => {
+interface FooterProps {
+  source: string;
+}
+
+const Footer: FC<FooterProps> = (props) => {
   return (
     <Bar>
-      <Source>Kilde: {source}</Source>
+      <Source>Kilder: {getSourceType(props.source)}</Source>
       Det er <strong>IKKE</strong> tillatt å kopiere/laste ned innholdsinformasjon (bilde, beskrivelse,
       innholdsfortegnelse, lydfiler m.m.) og bruke det i andre sammenhenger/tjenester.
     </Bar>
