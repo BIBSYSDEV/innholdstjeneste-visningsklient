@@ -11,11 +11,10 @@ const StyledBar = styled.div`
   font-size: 11px;
   font-style: italic;
   padding-left: 1rem;
-  padding-bottom: 1rem;
 `;
 
 const StyledSourceText = styled.div`
-  padding-bottom: 1rem;
+  font-size: 11px;
 `;
 
 export function getSourceType(src: string) {
