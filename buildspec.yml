@@ -11,10 +11,12 @@ phases:
       ruby: 2.6
     commands:
       - pip3 install --upgrade cfn-lint
-      #      - pip3 install --upgrade aws-sam-cli
 
       # Install cfn_nag
       - gem install cfn-nag
+      - node -v
+      - npm -v
+      - npm i -g npm
 
   pre_build:
     commands:
