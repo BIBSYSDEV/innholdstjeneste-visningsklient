@@ -421,7 +421,7 @@ Resources:
           - Name: S3_BUCKET
             Value: !Ref ArtifactsBucket
           - Name: REACT_APP_INNHOLDSTJENESTE_API_URL
-            Value: 'https://api.sandbox.bibs.aws.unit.no/contents'
+            Value: 'https://api.bibs.aws.unit.no/contents'
           - Name: REACT_APP_INNHOLDSTJENESTE_FILES_URL
             Value: !Sub 'https://${RecordSet}/'
       Name: !Sub '${AWS::StackName}-build'
