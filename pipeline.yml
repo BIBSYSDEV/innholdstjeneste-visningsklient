@@ -52,7 +52,7 @@ Parameters:
 #    AllowedValues:
 #      - 'dev'
 #      - 'prod'
-    Description: environment/stageing variables
+#    Description: environment/stageing variables
   CodeStarConnectionArn:
     Type: AWS::SSM::Parameter::Value<String>
     Default: '/github-connection'
