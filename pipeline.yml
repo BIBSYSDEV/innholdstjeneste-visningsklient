@@ -384,7 +384,6 @@ Resources:
                 - 'codebuild.amazonaws.com'
             Action:
               - 'sts:AssumeRole'
-              - ssm:GetParameters
       Policies:
         - PolicyName: ServiceRole
           PolicyDocument:
