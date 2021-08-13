@@ -46,13 +46,6 @@ Metadata:
         default: Sub domain name with trailing .
 
 Parameters:
-  Stage:
-    Type: String
-    Default: 'dev'
-    AllowedValues:
-      - 'dev'
-      - 'prod'
-    Description: environment/stageing variables
   CodeStarConnectionArn:
     Type: AWS::SSM::Parameter::Value<String>
     Default: '/github-connection'
@@ -402,7 +395,6 @@ Resources:
                   - s3:GetObject
                   - s3:GetObjectVersion
                   - s3:PutObject
-                  #            - s3:PutObjectAcl
                   - s3:CreateMultipartUpload
                   - s3:ListMultipartUploadParts
                   - s3:AbortMultipartUpload
@@ -428,11 +420,14 @@ Resources:
         EnvironmentVariables:
           - Name: S3_BUCKET
             Value: !Ref ArtifactsBucket
+          - Name: REACT_APP_INNHOLDSTJENESTE_API_URL
+            Value: 'https://api.sandbox.bibs.aws.unit.no/contents'
+          - Name: REACT_APP_INNHOLDSTJENESTE_FILES_URL
+            Value: !Sub 'https://${RecordSet}/'
       Name: !Sub '${AWS::StackName}-build'
       ServiceRole: !GetAtt 'CodeBuildRole.Arn'
       Source:
         Type: CODEPIPELINE
-        BuildSpec: !Join ['', ['buildspec', '-', !Ref 'Stage', '.yml']]
       TimeoutInMinutes: 30
       Cache:
         Type: S3
@@ -542,7 +537,6 @@ Resources:
                 - Name: BuildArtifacts
               Configuration:
                 BucketName: !If [IsCreateNewBucketCondition, !Ref WebsiteBucket, !Ref ExistingBucketName]
-                #            ObjectKey: '{datetime}/'
                 Extract: true
               RunOrder: 2
             - Name: InvalidateDistribution
