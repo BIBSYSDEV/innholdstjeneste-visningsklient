@@ -431,12 +431,12 @@ Resources:
           - Name: REACT_APP_INNHOLDSTJENESTE_API_URL
             Value: 'https://api.sandbox.bibs.aws.unit.no/contents'
           - Name: REACT_APP_INNHOLDSTJENESTE_FILES_URL
-            Value: !Sub 'https://${RecordSet}'
+            Value: !Sub 'https://${RecordSet}/'
       Name: !Sub '${AWS::StackName}-build'
       ServiceRole: !GetAtt 'CodeBuildRole.Arn'
       Source:
         Type: CODEPIPELINE
-        BuildSpec: !Join ['', ['buildspec', '-', '{{resolve:ssm:environment}}' , '.yml']]
+#        BuildSpec: !Join ['', ['buildspec', '-', '{{resolve:ssm:environment}}' , '.yml']]
       TimeoutInMinutes: 30
       Cache:
         Type: S3
