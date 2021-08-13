@@ -384,6 +384,7 @@ Resources:
                 - 'codebuild.amazonaws.com'
             Action:
               - 'sts:AssumeRole'
+              - ssm:GetParameters
       Policies:
         - PolicyName: ServiceRole
           PolicyDocument:
@@ -428,6 +429,10 @@ Resources:
         EnvironmentVariables:
           - Name: S3_BUCKET
             Value: !Ref ArtifactsBucket
+          - Name: REACT_APP_INNHOLDSTJENESTE_API_URL
+            Value: 'https://api.sandbox.bibs.aws.unit.no/contents'
+          - Name: REACT_APP_INNHOLDSTJENESTE_FILES_URL
+            Value: !Sub 'https://${RecordSet}'
       Name: !Sub '${AWS::StackName}-build'
       ServiceRole: !GetAtt 'CodeBuildRole.Arn'
       Source:
