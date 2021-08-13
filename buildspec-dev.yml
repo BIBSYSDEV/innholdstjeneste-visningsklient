@@ -4,8 +4,8 @@ version: 0.2
 env:
   shell: bash
   parameter-store:
-    REACT_APP_INNHOLDSTJENESTE_API_URL: "/contents/contentsApiUrl"
-    REACT_APP_INNHOLDSTJENESTE_FILES_URL: "contentsUrlStart"
+    REACT_APP_INNHOLDSTJENESTE_API_URL: /contents/contentsApiUrl
+    REACT_APP_INNHOLDSTJENESTE_FILES_URL: contentsUrlStart
 
 phases:
   install:
