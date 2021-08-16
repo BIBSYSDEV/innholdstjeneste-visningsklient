@@ -1,6 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-CI=true
 npx pretty-quick --staged
-npm test
+CI=true npm test
