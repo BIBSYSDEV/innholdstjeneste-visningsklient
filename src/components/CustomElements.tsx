@@ -85,11 +85,24 @@ export const ImageContainer = styled.img`
   margin-left: 1rem;
   height: 100%;
   width: fit-content;
+  max-width: 100%;
+  @media (min-width: 960px) {
+    max-width: 50%;
+  }
 `;
 
 export const ErrorTextField = styled.div`
   white-space: pre-line;
   font-weight: Bold;
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+`;
+
+export const ProgressWrapper = styled.div`
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
 `;
 
 export const CollapsedAudio = styled.div`

@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import './App.css';
+import React, { useEffect, useState } from 'react';
 import { Innholdsformasjon } from './types';
 import CollapsedBox from './components/CollapsedBox';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { ErrorTextField, ImageContainer, ISBNLabel, TitleLabel } from './components/CustomElements';
+import { ErrorTextField, ImageContainer, ISBNLabel, ProgressWrapper, TitleLabel } from './components/CustomElements';
 import { getInnholdsinformasjon } from './services/api';
 
-const URL = window.location.href;
 const filesUrl = process.env.REACT_APP_INNHOLDSTJENESTE_FILES_URL;
 const oriaKeyword = 'oria';
 
@@ -19,6 +18,8 @@ const App = () => {
   const [innholdsinformasjon, setInnholdsinformasjon] = useState<Innholdsformasjon | undefined>();
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState<Error>();
+  const query = new URLSearchParams(window.location.search);
+  const oriaParameterIsSet = query.has(oriaKeyword);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +32,7 @@ const App = () => {
         setIsLoading(true);
         setLoadingError(undefined);
         setInnholdsinformasjon(await getInnholdsinformasjon(isbn));
-      } catch (e) {
+      } catch (error) {
         setLoadingError(new Error('Failed to retrieve the resource, please try again.'));
       } finally {
         setIsLoading(false);
@@ -40,15 +41,7 @@ const App = () => {
     fetchData();
   }, []);
 
-  if (loadingError) {
-    return <ErrorTextField>{loadingError.message}</ErrorTextField>;
-  }
-
-  if (!innholdsinformasjon) {
-    return !oriaParameterIsSet() ? <Header /> : null;
-  }
-
-  function getIsbnFromQueryOrPath() {
+  const getIsbnFromQueryOrPath = () => {
     const searchQuery = new URLSearchParams(window.location.search);
     let isbn = searchQuery.get('isbn');
     if (!isbn) {
@@ -57,27 +50,27 @@ const App = () => {
       isbn = path.substring(path.lastIndexOf('/') + 1);
     }
     return isbn;
-  }
+  };
 
-  function oriaParameterIsSet() {
-    return URL.includes(oriaKeyword);
-  }
-
-  function getClassNameBasedOnURL() {
-    return oriaParameterIsSet() ? oriaKeyword : '';
-  }
+  const getClassNameBasedOnURL = () => {
+    return oriaParameterIsSet ? oriaKeyword : '';
+  };
 
   return (
     <>
       {isLoading ? (
-        <progress />
-      ) : (
+        <ProgressWrapper>
+          <progress />
+        </ProgressWrapper>
+      ) : loadingError ? (
+        <ErrorTextField>{loadingError.message}</ErrorTextField>
+      ) : innholdsinformasjon ? (
         <>
-          {!oriaParameterIsSet() && (
+          {!oriaParameterIsSet && (
             <>
               <Header />
-              <TitleLabel className={getClassNameBasedOnURL()}>{innholdsinformasjon.title}</TitleLabel>
-              <ISBNLabel className={getClassNameBasedOnURL()}>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
+              <TitleLabel>{innholdsinformasjon.title}</TitleLabel>
+              <ISBNLabel>ISBN: {innholdsinformasjon.isbn}</ISBNLabel>
             </>
           )}
 
@@ -88,7 +81,7 @@ const App = () => {
                   className={getClassNameBasedOnURL()}
                   name="Beskrivelse fra forlaget (kort)"
                   contents={innholdsinformasjon.description_short}
-                  open={true}
+                  open={true} //todo
                 />
               )}
               {!isEmpty(innholdsinformasjon.description_long) && (
@@ -116,13 +109,15 @@ const App = () => {
                 />
               )}
             </div>
-            {filesUrl && !oriaParameterIsSet() && innholdsinformasjon.image_path && (
+            {filesUrl && !oriaParameterIsSet && innholdsinformasjon.image_path && (
               <ImageContainer src={filesUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
             )}
           </div>
+          <Footer source={innholdsinformasjon.source} />
         </>
+      ) : (
+        !oriaParameterIsSet && <Header />
       )}
-      <Footer source={innholdsinformasjon.source} />
     </>
   );
 };
