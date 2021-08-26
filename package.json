@@ -16,6 +16,7 @@
     "iframe-resizer": "^4.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.1",
     "web-vitals": "^2.1.0"
@@ -28,9 +29,9 @@
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "@types/styled-components": "^5.1.12",
+    "chokidar": "^3.5.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.1",
-    "chokidar": "^3.5.2",
     "husky": "^7.0.1",
     "prettier": "^2.3.2",
     "pretty-quick": "^3.1.1",

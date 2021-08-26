@@ -1,10 +1,17 @@
-import './App.css';
 import React, { useEffect, useState } from 'react';
 import { Innholdsformasjon } from './types';
 import CollapsedBox from './components/CollapsedBox';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { ErrorTextField, ImageContainer, ISBNLabel, ProgressWrapper, TitleLabel } from './components/CustomElements';
+import {
+  BoxesWrapper,
+  ContentWrapper,
+  ErrorTextField,
+  ImageContainer,
+  ISBNLabel,
+  ProgressWrapper,
+  TitleLabel,
+} from './components/CustomElements';
 import { getInnholdsinformasjon } from './services/api';
 
 const filesUrl = process.env.REACT_APP_INNHOLDSTJENESTE_FILES_URL;
@@ -74,14 +81,14 @@ const App = () => {
             </>
           )}
 
-          <div className={'content-wrapper'}>
-            <div className={'collapsed-boxes'}>
+          <ContentWrapper>
+            <BoxesWrapper>
               {!isEmpty(innholdsinformasjon.description_short) && (
                 <CollapsedBox
                   className={getClassNameBasedOnURL()}
                   name="Beskrivelse fra forlaget (kort)"
                   contents={innholdsinformasjon.description_short}
-                  open={true} //todo
+                  open={!oriaParameterIsSet}
                 />
               )}
               {!isEmpty(innholdsinformasjon.description_long) && (
@@ -108,11 +115,11 @@ const App = () => {
                   open={false}
                 />
               )}
-            </div>
+            </BoxesWrapper>
             {filesUrl && !oriaParameterIsSet && innholdsinformasjon.image_path && (
               <ImageContainer src={filesUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
             )}
-          </div>
+          </ContentWrapper>
           <Footer source={innholdsinformasjon.source} />
         </>
       ) : (
