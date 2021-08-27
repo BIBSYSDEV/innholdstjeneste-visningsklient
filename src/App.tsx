@@ -16,6 +16,7 @@ import { getInnholdsinformasjon } from './services/api';
 
 const filesUrl = process.env.REACT_APP_INNHOLDSTJENESTE_FILES_URL;
 export const oriaKeyword = 'oria';
+export const systemKeyword = 'system';
 
 function isEmpty(array?: string[]): boolean {
   return !(array && array.length);
@@ -26,7 +27,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState<Error>();
   const query = new URLSearchParams(window.location.search);
-  const oriaParameterIsSet = query.has(oriaKeyword);
+  const oriaParameterIsSet = query.get(systemKeyword) === oriaKeyword;
 
   useEffect(() => {
     const fetchData = async () => {
