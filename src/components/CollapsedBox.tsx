@@ -29,7 +29,7 @@ const StyledCollapseButton = styled.button`
   && {
     width: 100%;
     display: inline-block;
-    background-color: white;
+    background-color: #fafafa;
     color: rgb(40, 75, 99);
     text-align: left;
     font-family: Barlow, sans-serif;
@@ -44,7 +44,7 @@ const StyledCollapseButton = styled.button`
     &.oria {
       color: rgb(0, 0, 0);
       border-color: rgb(0, 0, 0);
-      font-weight: normal;
+      font-weight: bold;
       font-size: 15px;
     }
     &:hover {
