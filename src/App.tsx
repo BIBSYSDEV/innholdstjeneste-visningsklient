@@ -15,7 +15,7 @@ import {
 import { getInnholdsinformasjon } from './services/api';
 
 const filesUrl = process.env.REACT_APP_INNHOLDSTJENESTE_FILES_URL;
-const oriaKeyword = 'oria';
+export const oriaKeyword = 'oria';
 
 function isEmpty(array?: string[]): boolean {
   return !(array && array.length);
@@ -59,10 +59,6 @@ const App = () => {
     return isbn;
   };
 
-  const getClassNameBasedOnURL = () => {
-    return oriaParameterIsSet ? oriaKeyword : '';
-  };
-
   return (
     <>
       {isLoading ? (
@@ -85,7 +81,7 @@ const App = () => {
             <BoxesWrapper>
               {!isEmpty(innholdsinformasjon.description_short) && (
                 <CollapsedBox
-                  className={getClassNameBasedOnURL()}
+                  oriaParameterIsSet={oriaParameterIsSet}
                   name="Beskrivelse fra forlaget (kort)"
                   contents={innholdsinformasjon.description_short}
                   open={!oriaParameterIsSet}
@@ -93,7 +89,7 @@ const App = () => {
               )}
               {!isEmpty(innholdsinformasjon.description_long) && (
                 <CollapsedBox
-                  className={getClassNameBasedOnURL()}
+                  oriaParameterIsSet={oriaParameterIsSet}
                   name="Beskrivelse fra forlaget (lang)"
                   contents={innholdsinformasjon.description_long}
                   open={isEmpty(innholdsinformasjon.description_short)}
@@ -101,7 +97,7 @@ const App = () => {
               )}
               {!isEmpty(innholdsinformasjon.table_of_contents) && (
                 <CollapsedBox
-                  className={getClassNameBasedOnURL()}
+                  oriaParameterIsSet={oriaParameterIsSet}
                   name="Innholdsfortegnelse"
                   contents={innholdsinformasjon.table_of_contents}
                   open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
@@ -109,7 +105,7 @@ const App = () => {
               )}
               {filesUrl && innholdsinformasjon.audio_file && (
                 <CollapsedBox
-                  className={getClassNameBasedOnURL()}
+                  oriaParameterIsSet={oriaParameterIsSet}
                   name="Lydutdrag"
                   mp3File={filesUrl + innholdsinformasjon.audio_file}
                   open={false}

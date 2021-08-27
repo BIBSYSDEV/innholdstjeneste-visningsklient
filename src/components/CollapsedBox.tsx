@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { FaChevronDown, FaChevronRight } from 'react-icons/fa';
 import styled from 'styled-components';
+import { oriaKeyword } from '../App';
 
 const StyledCollapseContainer = styled.div`
   margin-left: 1rem;
@@ -49,6 +50,9 @@ const StyledCollapseButton = styled.button`
     &:hover {
       border-color: orange;
     }
+    &:focus {
+      background-color: #e0e0e0;
+    }
   }
 `;
 const StyledChevronWrapper = styled.span`
@@ -64,10 +68,10 @@ interface CollapsedBoxProps {
   contents?: string[];
   mp3File?: string;
   open: boolean;
-  className: string;
+  oriaParameterIsSet: boolean;
 }
 
-const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, mp3File, open, className }) => {
+const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, mp3File, open, oriaParameterIsSet }) => {
   const [collapsed, setcollapsed] = useState(!open);
 
   const handleButtonClick = () => {
@@ -75,8 +79,12 @@ const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, mp3File,
   };
 
   return (
-    <StyledCollapseContainer className={className}>
-      <StyledCollapseButton className={className} aria-expanded={!collapsed} role="knapp" onClick={handleButtonClick}>
+    <StyledCollapseContainer className={oriaParameterIsSet ? oriaKeyword : ''}>
+      <StyledCollapseButton
+        className={oriaParameterIsSet ? oriaKeyword : ''}
+        aria-expanded={!collapsed}
+        role="knapp"
+        onClick={handleButtonClick}>
         <StyledButtonContent>
           <StyledChevronWrapper>{!collapsed ? <FaChevronDown /> : <FaChevronRight />}</StyledChevronWrapper>
           {name}
