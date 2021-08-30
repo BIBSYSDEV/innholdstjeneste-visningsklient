@@ -48,7 +48,7 @@ const StyledCollapseButton = styled.button`
       font-size: 15px;
     }
     &:hover {
-      border-color: orange;
+      background-color: #eeeeee;
     }
     &:focus {
       background-color: #e0e0e0;
