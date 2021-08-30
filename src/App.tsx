@@ -93,7 +93,7 @@ const App = () => {
                   oriaParameterIsSet={oriaParameterIsSet}
                   name="Beskrivelse fra forlaget (lang)"
                   contents={innholdsinformasjon.description_long}
-                  open={isEmpty(innholdsinformasjon.description_short)}
+                  open={!oriaParameterIsSet && isEmpty(innholdsinformasjon.description_short)}
                 />
               )}
               {!isEmpty(innholdsinformasjon.table_of_contents) && (
@@ -101,7 +101,11 @@ const App = () => {
                   oriaParameterIsSet={oriaParameterIsSet}
                   name="Innholdsfortegnelse"
                   contents={innholdsinformasjon.table_of_contents}
-                  open={isEmpty(innholdsinformasjon.description_short) && isEmpty(innholdsinformasjon.description_long)}
+                  open={
+                    !oriaParameterIsSet &&
+                    isEmpty(innholdsinformasjon.description_short) &&
+                    isEmpty(innholdsinformasjon.description_long)
+                  }
                 />
               )}
               {filesUrl && innholdsinformasjon.audio_file && (
