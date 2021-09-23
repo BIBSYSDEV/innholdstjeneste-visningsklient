@@ -64,7 +64,6 @@ const StyledButtonContent = styled.div`
 `;
 interface CollapsedBoxProps {
   name: string;
-  summary?: string;
   contents?: string[];
   mp3File?: string;
   open: boolean;
