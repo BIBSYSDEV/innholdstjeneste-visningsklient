@@ -23,7 +23,7 @@ function isEmpty(array?: string[]): boolean {
 }
 
 const App = () => {
-  const [innholdsinformasjon, setInnholdsinformasjon] = useState<Innholdsformasjon | undefined>();
+  const [innholdsinformasjon, setInnholdsinformasjon] = useState<Innholdsformasjon>();
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState<Error>();
   const query = new URLSearchParams(window.location.search);
@@ -46,7 +46,7 @@ const App = () => {
         setIsLoading(false);
       }
     };
-    fetchData();
+    fetchData().then();
   }, []);
 
   const getIsbnFromQueryOrPath = () => {

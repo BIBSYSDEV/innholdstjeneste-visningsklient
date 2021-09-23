@@ -1,10 +1,19 @@
 import { Innholdsformasjon } from '../types';
 import axios from 'axios';
+import Axios from 'axios';
+import { API_URL } from '../constants';
 
-const apiUrl = process.env.REACT_APP_INNHOLDSTJENESTE_API_URL;
+export enum SearchParameters {
+  isbn = 'isbn',
+}
+
+Axios.defaults.baseURL = API_URL;
+Axios.defaults.headers.common = {
+  Accept: 'application/json',
+};
 
 export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsformasjon> => {
-  const url = `${apiUrl}?isbn=${isbn}`;
+  const url = `?${SearchParameters.isbn}=${isbn}`;
   const apiResponse = await axios.get(url);
   const innholdResponse = JSON.parse(apiResponse.data.body);
   const innholdsinformasjon: Innholdsformasjon = { isbn: isbn };
