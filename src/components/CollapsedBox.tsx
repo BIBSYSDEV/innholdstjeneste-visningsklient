@@ -80,7 +80,7 @@ const CollapsedBox: FC<CollapsedBoxProps> = ({ name, contents, mp3File, open, or
   };
 
   return (
-    <StyledCollapseContainer data-Testid={dataTestid} className={oriaParameterIsSet ? oriaKeyword : ''}>
+    <StyledCollapseContainer data-testid={dataTestid} className={oriaParameterIsSet ? oriaKeyword : ''}>
       <StyledCollapseButton
         className={oriaParameterIsSet ? oriaKeyword : ''}
         aria-expanded={!collapsed}
