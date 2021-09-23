@@ -12,11 +12,9 @@ import {
   ProgressWrapper,
   TitleLabel,
 } from './components/CustomElements';
-import { getInnholdsinformasjon } from './services/api';
+import { getInnholdsinformasjon, oriaKeyword, SearchParameters } from './services/api';
 
 const filesUrl = process.env.REACT_APP_INNHOLDSTJENESTE_FILES_URL;
-export const oriaKeyword = 'oria';
-export const systemKeyword = 'system';
 
 function isEmpty(array?: string[]): boolean {
   return !(array && array.length);
@@ -27,7 +25,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState<Error>();
   const query = new URLSearchParams(window.location.search);
-  const oriaParameterIsSet = query.get(systemKeyword) === oriaKeyword;
+  const oriaParameterIsSet = query.get(SearchParameters.system) === oriaKeyword;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +65,7 @@ const App = () => {
           <progress />
         </ProgressWrapper>
       ) : loadingError ? (
-        <ErrorTextField>{loadingError.message}</ErrorTextField>
+        <ErrorTextField data-testid="loading-error">{loadingError.message}</ErrorTextField>
       ) : innholdsinformasjon ? (
         <>
           {!oriaParameterIsSet && (
@@ -82,6 +80,7 @@ const App = () => {
             <BoxesWrapper>
               {!isEmpty(innholdsinformasjon.description_short) && (
                 <CollapsedBox
+                  dataTestid="description-short-box"
                   oriaParameterIsSet={oriaParameterIsSet}
                   name="Beskrivelse fra forlaget (kort)"
                   contents={innholdsinformasjon.description_short}
@@ -90,6 +89,7 @@ const App = () => {
               )}
               {!isEmpty(innholdsinformasjon.description_long) && (
                 <CollapsedBox
+                  dataTestid="description-long-box"
                   oriaParameterIsSet={oriaParameterIsSet}
                   name="Beskrivelse fra forlaget (lang)"
                   contents={innholdsinformasjon.description_long}
@@ -98,6 +98,7 @@ const App = () => {
               )}
               {!isEmpty(innholdsinformasjon.table_of_contents) && (
                 <CollapsedBox
+                  dataTestid="description-toc-box"
                   oriaParameterIsSet={oriaParameterIsSet}
                   name="Innholdsfortegnelse"
                   contents={innholdsinformasjon.table_of_contents}
@@ -110,6 +111,7 @@ const App = () => {
               )}
               {filesUrl && innholdsinformasjon.audio_file && (
                 <CollapsedBox
+                  dataTestid="description-audio-file-box"
                   oriaParameterIsSet={oriaParameterIsSet}
                   name="Lydutdrag"
                   mp3File={filesUrl + innholdsinformasjon.audio_file}
@@ -118,7 +120,11 @@ const App = () => {
               )}
             </BoxesWrapper>
             {filesUrl && !oriaParameterIsSet && innholdsinformasjon.image_path && (
-              <ImageContainer src={filesUrl + innholdsinformasjon.image_path} alt="Bilde av boken" />
+              <ImageContainer
+                data-testid="cover-image-container"
+                src={filesUrl + innholdsinformasjon.image_path}
+                alt="Bilde av boken"
+              />
             )}
           </ContentWrapper>
           <Footer source={innholdsinformasjon.source} />
@@ -126,6 +132,8 @@ const App = () => {
       ) : (
         !oriaParameterIsSet && <Header />
       )}
+      <p />
+      <p />
     </>
   );
 };

@@ -5,13 +5,13 @@ import { SearchParameters } from './api';
 export const mockIsbnThatTriggersServerError = '4723947823';
 
 const mockResponse = {
-  body: '{"image_small":"files/images/small/4/2/9788202479824.jpg","description_short":"Det er en fin sommerdag. 14 år gamle Arnstein Weide kommer for å treffe kameraten sin, Ã˜rjan. Men utenfor huset er det biler og politifolk. På skolen neste dag går det rykter om at Ã˜rjan har skutt faren sin. Og at han deretter er forsvunnet. Tjue år senere er Arnstein blitt forfatter. Ã˜rjan er fortsatt forsvunnet, drapet like uoppklart. Så dukker en teatergruppe fra Tyskland opp. Og ting begynner å skje.","image_original":"files/images/original/4/2/9788202479824.jpg","created":"2021-05-08T09:53:08.841154Z","isbn":"9788202479824","description_long":"Det er en fin sommerdag. 14 år gamle Arnstein Weide kommer for å treffe kameraten sin, Ørjan. Men utenfor huset er det biler og politifolk. På skolen neste dag går det rykter om at Ørjan har skutt faren sin. Og at han deretter er forsvunnet. Tjue år senere er Arnstein blitt forfatter. Ørjan er fortsatt forsvunnet, drapet like uoppklart. Så dukker en teatergruppe fra Tyskland opp. Og ting begynner å skje.","date_of_publication":"2015","modified":"2021-09-02T01:01:07.113491Z","source":"BOKBASEN","image_large":"files/images/large/4/2/9788202479824.jpg","title":"Tittel ikke tilgjengelig"}',
+  body: '{"image_small":"files/images/small/7/4/9788205377547.jpg","description_short":"Etter å ha brutt opp fra sin sakførerpraksis i Norge, reiste Ingstad til arktiske Canada, der han levde i fire år som pelsjeger.","created":"2021-08-19T11:08:00.208848Z","author":"Helge Ingstad","isbn":"9788205377547","description_long":"Etter å ha brutt opp fra sin sakførerpraksis i Norge, reiste Ingstad til arktiske Canada, der han levde i fire år som pelsjeger. Pelsjegerliv er beretningen om hans opplevelser i denne tiden. Boken ble utgitt i 1931 og er hans første av i alt tolv bøker","date_of_publication":"1931","source":"BOKBASE","title":"Pelsjegerliv blandt Nord-Canadas indianere","table_of_contents":"The openingSecond breakfastCinco de mayo"}',
   headers: {
-    'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Credentials': 'true',
-    'Access-Control-Allow-Methods': 'OPTIONS,GET',
-    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Methods': 'OPTIONS,GET',
   },
   statusCode: 200,
 };
@@ -37,7 +37,6 @@ export const interceptRequestsOnMock = () => {
   //   return [statusCode, mockedResult];
   // };
 
-  // mock.onGet(`\\?${SearchParameters.isbn}=${mockIsbnThatTriggersServerError}`).reply(500, null);
   mock.onGet(new RegExp(`\\?${SearchParameters.isbn}=${mockIsbnThatTriggersServerError}`)).reply(500, mockResponse);
   mock.onGet(new RegExp(`.*`)).reply(200, mockResponse);
 

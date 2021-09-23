@@ -5,7 +5,10 @@ import { API_URL } from '../constants';
 
 export enum SearchParameters {
   isbn = 'isbn',
+  system = 'system',
 }
+
+export const oriaKeyword = 'oria';
 
 Axios.defaults.baseURL = API_URL;
 Axios.defaults.headers.common = {
