@@ -1,4 +1,4 @@
-import { Innholdsformasjon } from '../types';
+import { ContentsResponse, Innholdsformasjon } from '../types';
 import axios from 'axios';
 import Axios from 'axios';
 import { API_URL } from '../constants';
@@ -18,7 +18,7 @@ Axios.defaults.headers.common = {
 export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsformasjon> => {
   const url = `?${SearchParameters.isbn}=${isbn}`;
   const apiResponse = await axios.get(url);
-  const innholdResponse = JSON.parse(apiResponse.data.body);
+  const innholdResponse: ContentsResponse = JSON.parse(apiResponse.data.body);
   const innholdsinformasjon: Innholdsformasjon = { isbn: isbn };
   if (!innholdResponse) {
     return innholdsinformasjon;
