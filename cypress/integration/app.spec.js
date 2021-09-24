@@ -1,7 +1,7 @@
 import { mockIsbnAudioBook, mockIsbnThatTriggersServerError } from '../../src/services/mock-interceptors';
 import { oriaKeyword, SearchParameters } from '../../src/services/api';
 
-context('start', () => {
+context('application', () => {
   it('successfully shows a full page', () => {
     cy.visit('?isbn=1234567');
     cy.get('[data-testid="page-header"]').should('exist');
