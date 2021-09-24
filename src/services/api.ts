@@ -17,23 +17,23 @@ Axios.defaults.headers.common = {
 
 export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsformasjon> => {
   const url = `?${SearchParameters.isbn}=${isbn}`;
-  const apiResponse = await axios.get(url);
-  const innholdResponse: ContentsResponse = JSON.parse(apiResponse.data.body);
+  const innholdResponse: ContentsResponse = (await axios.get(url)).data;
+
   const innholdsinformasjon: Innholdsformasjon = { isbn: isbn };
   if (!innholdResponse) {
     return innholdsinformasjon;
   }
   innholdsinformasjon.title = innholdResponse.title;
-  innholdsinformasjon.image_path = getImagePath(
-    innholdResponse.image_small,
-    innholdResponse.image_original,
-    innholdResponse.image_large
+  innholdsinformasjon.imagePath = getImagePath(
+    innholdResponse.imageSmall,
+    innholdResponse.imageOriginal,
+    innholdResponse.imageLarge
   );
-  innholdsinformasjon.description_short = splitOnSomeTags(innholdResponse.description_short).map(removeAllTags);
-  innholdsinformasjon.description_long = splitOnSomeTags(innholdResponse.description_long).map(removeAllTags);
-  innholdsinformasjon.table_of_contents = splitOnSomeTags(innholdResponse.table_of_contents).map(removeAllTags);
+  innholdsinformasjon.descriptionShort = splitOnSomeTags(innholdResponse.descriptionShort).map(removeAllTags);
+  innholdsinformasjon.descriptionLong = splitOnSomeTags(innholdResponse.descriptionLong).map(removeAllTags);
+  innholdsinformasjon.tableOfContents = splitOnSomeTags(innholdResponse.tableOfContents).map(removeAllTags);
 
-  innholdsinformasjon.audio_file = innholdResponse.audio_file ?? null;
+  innholdsinformasjon.audioFile = innholdResponse.audioFile ?? null;
 
   innholdsinformasjon.source = innholdResponse.source;
 
