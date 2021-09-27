@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { FaChevronDown, FaChevronRight } from 'react-icons/fa';
 import styled from 'styled-components';
-import { oriaKeyword } from '../App';
+import { oriaKeyword } from '../services/api';
 
 const StyledCollapseContainer = styled.div`
   margin-left: 1rem;
@@ -64,14 +64,14 @@ const StyledButtonContent = styled.div`
 `;
 interface CollapsedBoxProps {
   name: string;
-  summary?: string;
   contents?: string[];
   mp3File?: string;
   open: boolean;
   oriaParameterIsSet: boolean;
+  dataTestid?: string;
 }
 
-const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, mp3File, open, oriaParameterIsSet }) => {
+const CollapsedBox: FC<CollapsedBoxProps> = ({ name, contents, mp3File, open, oriaParameterIsSet, dataTestid }) => {
   const [collapsed, setcollapsed] = useState(!open);
 
   const handleButtonClick = () => {
@@ -79,7 +79,7 @@ const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, mp3File,
   };
 
   return (
-    <StyledCollapseContainer className={oriaParameterIsSet ? oriaKeyword : ''}>
+    <StyledCollapseContainer data-testid={dataTestid} className={oriaParameterIsSet ? oriaKeyword : ''}>
       <StyledCollapseButton
         className={oriaParameterIsSet ? oriaKeyword : ''}
         aria-expanded={!collapsed}
@@ -92,18 +92,17 @@ const CollapsedBox: FC<CollapsedBoxProps> = ({ name, summary, contents, mp3File,
       </StyledCollapseButton>
       {!collapsed && (
         <>
-          {summary && <StyledContents aria-relevant="text">{summary}</StyledContents>}
           {contents && (
-            <StyledContents aria-relevant="text">
+            <StyledContents data-testid={`${dataTestid}-contents`} aria-relevant="text">
               {contents.map((value, index) => {
                 return <p key={index}>{value}</p>;
               })}
             </StyledContents>
           )}
           {!collapsed && mp3File && (
-            <StyledContents>
+            <StyledContents data-testid={`${dataTestid}-audio`}>
               <audio controls controlsList="nodownload">
-                <source src={mp3File} type="audio/mpeg" />
+                <source data-testid="audio-source" src={mp3File} type="audio/mpeg" />
               </audio>
             </StyledContents>
           )}
