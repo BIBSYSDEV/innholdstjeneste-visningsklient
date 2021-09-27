@@ -34,8 +34,6 @@ interface FooterProps {
 }
 
 const Footer: FC<FooterProps> = ({ source }) => {
-  console.log('test');
-
   return (
     <StyledBar data-testid="page-footer">
       <StyledSourceText>Kilde: {getSourceType(source ?? '')}</StyledSourceText>
