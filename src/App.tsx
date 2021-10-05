@@ -132,8 +132,8 @@ const App = () => {
       ) : (
         !oriaParameterIsSet && <Header />
       )}
-      <p />
-      <p />
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
     </>
   );
 };
