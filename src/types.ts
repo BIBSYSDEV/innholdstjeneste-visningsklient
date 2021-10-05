@@ -1,10 +1,22 @@
 export interface Innholdsformasjon {
   isbn: string;
   title?: string;
-  description_short?: string[];
-  description_long?: string[];
-  table_of_contents?: string[];
-  image_path?: string;
-  audio_file?: string;
+  descriptionShort?: string[];
+  descriptionLong?: string[];
+  tableOfContents?: string[];
+  imagePath?: string;
+  audioFile?: string;
   source?: string;
+}
+
+export interface ContentsResponse {
+  source: string;
+  audioFile: string;
+  tableOfContents: string;
+  descriptionLong: string;
+  descriptionShort: string;
+  title: string;
+  imageLarge: string;
+  imageOriginal: string;
+  imageSmall: string;
 }

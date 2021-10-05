@@ -5,7 +5,6 @@ import UnitLogo from '../resources/logoUnit.png';
 const StyledHeader = styled.div`
   height: 5rem;
   width: 100%;
-  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,8 +29,8 @@ const StyledLogo = styled.img`
 
 const Header: FC = () => {
   return (
-    <StyledHeader>
-      <StyledHeading>Innholdsinformasjon</StyledHeading>
+    <StyledHeader data-testid="page-header">
+      <StyledHeading> Innholdsinformasjon</StyledHeading>
       <StyledLogo src={UnitLogo} alt="Unit logo" />
     </StyledHeader>
   );
