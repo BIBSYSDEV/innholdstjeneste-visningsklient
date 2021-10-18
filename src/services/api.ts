@@ -17,7 +17,7 @@ Axios.defaults.headers.common = {
 
 export const getInnholdsinformasjon = async (isbn: string): Promise<Innholdsformasjon> => {
   const url = `?${SearchParameters.isbn}=${isbn}`;
-  const innholdResponse: ContentsResponse = (await axios.get(url)).data;
+  const innholdResponse = (await axios.get<ContentsResponse>(url)).data;
 
   const innholdsinformasjon: Innholdsformasjon = { isbn: isbn };
   if (!innholdResponse) {
