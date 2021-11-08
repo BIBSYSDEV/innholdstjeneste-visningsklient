@@ -149,11 +149,9 @@ Resources:
         RestrictPublicBuckets: true
       LifecycleConfiguration:
         Rules:
-          - Id: IntelligentTieringRule
+          - Id: DeleteContentAfter8Days
             Status: Enabled
-            Transition:
-              StorageClass: INTELLIGENT_TIERING
-              TransitionInDays: 30
+            ExpirationInDays: 8
 
   ContentsS3Bucket:
     Type: AWS::S3::Bucket
