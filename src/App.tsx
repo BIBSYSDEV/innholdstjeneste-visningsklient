@@ -76,57 +76,59 @@ const App = () => {
             </>
           )}
 
-          <ContentWrapper>
-            <BoxesWrapper>
-              {!isEmpty(innholdsinformasjon.descriptionShort) && (
-                <CollapsedBox
-                  dataTestid="description-short-box"
-                  oriaParameterIsSet={oriaParameterIsSet}
-                  name="Beskrivelse fra forlaget (kort)"
-                  contents={innholdsinformasjon.descriptionShort}
-                  open={!oriaParameterIsSet}
+          <main>
+            <ContentWrapper>
+              <BoxesWrapper>
+                {!isEmpty(innholdsinformasjon.descriptionShort) && (
+                  <CollapsedBox
+                    dataTestid="description-short-box"
+                    oriaParameterIsSet={oriaParameterIsSet}
+                    name="Beskrivelse fra forlaget (kort)"
+                    contents={innholdsinformasjon.descriptionShort}
+                    open={!oriaParameterIsSet}
+                  />
+                )}
+                {!isEmpty(innholdsinformasjon.descriptionLong) && (
+                  <CollapsedBox
+                    dataTestid="description-long-box"
+                    oriaParameterIsSet={oriaParameterIsSet}
+                    name="Beskrivelse fra forlaget (lang)"
+                    contents={innholdsinformasjon.descriptionLong}
+                    open={!oriaParameterIsSet && isEmpty(innholdsinformasjon.descriptionShort)}
+                  />
+                )}
+                {!isEmpty(innholdsinformasjon.tableOfContents) && (
+                  <CollapsedBox
+                    dataTestid="description-toc-box"
+                    oriaParameterIsSet={oriaParameterIsSet}
+                    name="Innholdsfortegnelse"
+                    contents={innholdsinformasjon.tableOfContents}
+                    open={
+                      !oriaParameterIsSet &&
+                      isEmpty(innholdsinformasjon.descriptionShort) &&
+                      isEmpty(innholdsinformasjon.descriptionLong)
+                    }
+                  />
+                )}
+                {filesUrl && innholdsinformasjon.audioFile && (
+                  <CollapsedBox
+                    dataTestid="description-audio-file-box"
+                    oriaParameterIsSet={oriaParameterIsSet}
+                    name="Lydutdrag"
+                    mp3File={filesUrl + innholdsinformasjon.audioFile}
+                    open={false}
+                  />
+                )}
+              </BoxesWrapper>
+              {filesUrl && !oriaParameterIsSet && innholdsinformasjon.imagePath && (
+                <ImageContainer
+                  data-testid="cover-image-container"
+                  src={filesUrl + innholdsinformasjon.imagePath}
+                  alt="Bilde av boken"
                 />
               )}
-              {!isEmpty(innholdsinformasjon.descriptionLong) && (
-                <CollapsedBox
-                  dataTestid="description-long-box"
-                  oriaParameterIsSet={oriaParameterIsSet}
-                  name="Beskrivelse fra forlaget (lang)"
-                  contents={innholdsinformasjon.descriptionLong}
-                  open={!oriaParameterIsSet && isEmpty(innholdsinformasjon.descriptionShort)}
-                />
-              )}
-              {!isEmpty(innholdsinformasjon.tableOfContents) && (
-                <CollapsedBox
-                  dataTestid="description-toc-box"
-                  oriaParameterIsSet={oriaParameterIsSet}
-                  name="Innholdsfortegnelse"
-                  contents={innholdsinformasjon.tableOfContents}
-                  open={
-                    !oriaParameterIsSet &&
-                    isEmpty(innholdsinformasjon.descriptionShort) &&
-                    isEmpty(innholdsinformasjon.descriptionLong)
-                  }
-                />
-              )}
-              {filesUrl && innholdsinformasjon.audioFile && (
-                <CollapsedBox
-                  dataTestid="description-audio-file-box"
-                  oriaParameterIsSet={oriaParameterIsSet}
-                  name="Lydutdrag"
-                  mp3File={filesUrl + innholdsinformasjon.audioFile}
-                  open={false}
-                />
-              )}
-            </BoxesWrapper>
-            {filesUrl && !oriaParameterIsSet && innholdsinformasjon.imagePath && (
-              <ImageContainer
-                data-testid="cover-image-container"
-                src={filesUrl + innholdsinformasjon.imagePath}
-                alt="Bilde av boken"
-              />
-            )}
-          </ContentWrapper>
+            </ContentWrapper>
+          </main>
           <Footer source={innholdsinformasjon.source} />
         </>
       ) : (
