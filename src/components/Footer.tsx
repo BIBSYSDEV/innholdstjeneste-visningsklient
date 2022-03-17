@@ -25,7 +25,7 @@ export function getSourceType(src: string) {
       return 'Bokbasen';
     default:
       //ALMA, ADABAS, BIBSYS
-      return 'Unit';
+      return 'Sikt';
   }
 }
 
