@@ -68,10 +68,19 @@ interface CollapsedBoxProps {
   mp3File?: string;
   open: boolean;
   oriaParameterIsSet: boolean;
+  contentId: string;
   dataTestid?: string;
 }
 
-const CollapsedBox: FC<CollapsedBoxProps> = ({ name, contents, mp3File, open, oriaParameterIsSet, dataTestid }) => {
+const CollapsedBox: FC<CollapsedBoxProps> = ({
+  name,
+  contents,
+  mp3File,
+  open,
+  oriaParameterIsSet,
+  contentId,
+  dataTestid,
+}) => {
   const [collapsed, setcollapsed] = useState(!open);
 
   const handleButtonClick = () => {
@@ -83,6 +92,7 @@ const CollapsedBox: FC<CollapsedBoxProps> = ({ name, contents, mp3File, open, or
       <StyledCollapseButton
         className={oriaParameterIsSet ? oriaKeyword : ''}
         aria-expanded={!collapsed}
+        aria-controls={contentId}
         role="knapp"
         onClick={handleButtonClick}>
         <StyledButtonContent>
@@ -91,7 +101,7 @@ const CollapsedBox: FC<CollapsedBoxProps> = ({ name, contents, mp3File, open, or
         </StyledButtonContent>
       </StyledCollapseButton>
       {!collapsed && (
-        <>
+        <div id={contentId}>
           {contents && (
             <StyledContents data-testid={`${dataTestid}-contents`} aria-relevant="text">
               {contents.map((value, index) => {
@@ -106,7 +116,7 @@ const CollapsedBox: FC<CollapsedBoxProps> = ({ name, contents, mp3File, open, or
               </audio>
             </StyledContents>
           )}
-        </>
+        </div>
       )}
     </StyledCollapseContainer>
   );
