@@ -82,6 +82,7 @@ const App = () => {
                 {!isEmpty(innholdsinformasjon.descriptionShort) && (
                   <CollapsedBox
                     dataTestid="description-short-box"
+                    contentId="description-short-box"
                     oriaParameterIsSet={oriaParameterIsSet}
                     name="Beskrivelse fra forlaget (kort)"
                     contents={innholdsinformasjon.descriptionShort}
@@ -91,6 +92,7 @@ const App = () => {
                 {!isEmpty(innholdsinformasjon.descriptionLong) && (
                   <CollapsedBox
                     dataTestid="description-long-box"
+                    contentId="description-long-box"
                     oriaParameterIsSet={oriaParameterIsSet}
                     name="Beskrivelse fra forlaget (lang)"
                     contents={innholdsinformasjon.descriptionLong}
@@ -100,6 +102,7 @@ const App = () => {
                 {!isEmpty(innholdsinformasjon.tableOfContents) && (
                   <CollapsedBox
                     dataTestid="description-toc-box"
+                    contentId="description-toc-box"
                     oriaParameterIsSet={oriaParameterIsSet}
                     name="Innholdsfortegnelse"
                     contents={innholdsinformasjon.tableOfContents}
@@ -113,6 +116,7 @@ const App = () => {
                 {filesUrl && innholdsinformasjon.audioFile && (
                   <CollapsedBox
                     dataTestid="description-audio-file-box"
+                    contentId="description-audio-file-box"
                     oriaParameterIsSet={oriaParameterIsSet}
                     name="Lydutdrag"
                     mp3File={filesUrl + innholdsinformasjon.audioFile}
