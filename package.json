@@ -29,7 +29,7 @@
     "axios-mock-adapter": "^1.21.2",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "cypress": "^12.8.1",
+    "cypress": "^12.9.0",
     "eslint-plugin-cypress": "^2.13.2",
     "chokidar": "^3.5.3",
     "husky": "^8.0.3",
