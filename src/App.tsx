@@ -20,6 +20,8 @@ function isEmpty(array?: string[]): boolean {
   return !(array && array.length);
 }
 
+//trigger rebuild
+
 const App = () => {
   const [innholdsinformasjon, setInnholdsinformasjon] = useState<Innholdsformasjon>();
   const [isLoading, setIsLoading] = useState(false);
