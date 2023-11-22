@@ -8,7 +8,6 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
-      ruby: 2.6
     commands:
       - pip3 install --upgrade cfn-lint
 
