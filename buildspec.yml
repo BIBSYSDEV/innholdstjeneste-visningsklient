@@ -7,7 +7,7 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 18
       ruby: 2.6
     commands:
       - pip3 install --upgrade cfn-lint
