@@ -16,6 +16,9 @@ phases:
       - node -v
       - npm -v
 
+      # https://docs.cypress.io/guides/continuous-integration/introduction#Dependencies
+      - yum install -y xorg-x11-server-Xvfb gtk2-devel gtk3-devel libnotify-devel GConf2 nss libXScrnSaver alsa-lib
+
   pre_build:
     commands:
       - echo "pre_build steps for revision ${CODEBUILD_RESOLVED_SOURCE_VERSION}..."
@@ -36,7 +39,7 @@ phases:
       # Run cfn-nag (looks for patterns in CFN templates that may indicate insecure infrastructure)
       - cfn_nag_scan --output-format txt --print-suppression --fail-on-warnings --blacklist-path .cfn_nag_blacklist --input-path . --template-pattern '^(?!.*buildspec.*)((..*\.y[a]?ml)|(..*\.template))$'
 
-      - npm install
+      - npm ci
 
   build:
     commands:
