@@ -4,11 +4,18 @@ version: 0.2
 env:
   shell: bash
 
+batch:
+  fast-fail: false
+  build-list:
+    - identifier: cypress-e2e-tests
+      env:
+        variables:
+          image: public.ecr.aws/cypress-io/cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+
 phases:
   install:
     runtime-versions:
-      nodejs: 14
-      ruby: 2.6
+      nodejs: 18
     commands:
       - pip3 install --upgrade cfn-lint
 
@@ -16,7 +23,6 @@ phases:
       - gem install cfn-nag
       - node -v
       - npm -v
-      - npm i -g npm
 
   pre_build:
     commands:
@@ -38,7 +44,7 @@ phases:
       # Run cfn-nag (looks for patterns in CFN templates that may indicate insecure infrastructure)
       - cfn_nag_scan --output-format txt --print-suppression --fail-on-warnings --blacklist-path .cfn_nag_blacklist --input-path . --template-pattern '^(?!.*buildspec.*)((..*\.y[a]?ml)|(..*\.template))$'
 
-      - npm install
+      - npm ci
 
   build:
     commands:
