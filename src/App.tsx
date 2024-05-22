@@ -20,7 +20,6 @@ function isEmpty(array?: string[]): boolean {
   return !(array && array.length);
 }
 
-console.log('testing')
 const App = () => {
   const [innholdsinformasjon, setInnholdsinformasjon] = useState<Innholdsformasjon>();
   const [isLoading, setIsLoading] = useState(false);
