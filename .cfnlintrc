@@ -6,3 +6,7 @@ ignore_templates:
 - ./**/buildspec.yaml
 - ./**/buildspec*.yml
 - ./**/buildspec*.yaml
+- ./**/node_modules/**
+ignore_checks:
+- W3045 # Ignoring this check because 'AccessControl' should still be supported for our use case
+- W1028 # Ignoring this check because we want this condition even if it will always only trigger on one and not the other
