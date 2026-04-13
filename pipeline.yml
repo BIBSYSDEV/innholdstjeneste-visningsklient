@@ -423,7 +423,7 @@ Resources:
         Type: GITHUB
         Location: https://github.com/BIBSYSDEV/innholdstjeneste-visningsklient.git
       Triggers:
-        Webhook: true
+        Webhook: false
       TimeoutInMinutes: 30
       Cache:
         Type: S3
