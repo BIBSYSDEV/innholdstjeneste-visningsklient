@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
-    "@cypress/code-coverage": "^3.14.6",
+    "@cypress/code-coverage": "^4.0.3",
     "@cypress/instrument-cra": "^1.4.0",
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",
