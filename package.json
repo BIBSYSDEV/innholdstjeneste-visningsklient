@@ -50,5 +50,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "allowScripts": {
+    "core-js": false,
+    "core-js-pure": false,
+    "cypress": false,
+    "iframe-resizer": false,
+    "fsevents": false
   }
 }
