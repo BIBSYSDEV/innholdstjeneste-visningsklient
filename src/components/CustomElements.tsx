@@ -37,7 +37,7 @@ export const BoxesWrapper = styled.div`
 export const ImageContainer = styled.img`
   margin-right: 1rem;
   margin-left: 1rem;
-  height: 100%;
+  align-self: flex-start;
   width: fit-content;
   max-width: 100%;
   @media (min-width: 960px) {
